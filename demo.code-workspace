@@ -1,0 +1,202 @@
+{
+  "folders": [
+    {
+      "name": "client",
+      "path": "client"
+    },
+    {
+      "name": "server",
+      "path": "server"
+    },
+    {
+      "name": "root",
+      "path": "."
+    }
+  ],
+  "extensions": {
+    "recommendations": [
+      "aaron-bond.better-comments",
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode"
+    ]
+  },
+  "settings": {
+    "eslint.lintTask.enable": true,
+    "better-comments.tags": [
+      {
+        "tag": "/ !",
+        "color": "#FF2D00",
+        "strikethrough": false,
+        "backgroundColor": "transparent"
+      },
+      {
+        "tag": "/ = !",
+        "color": "#FFFFFF",
+        "strikethrough": false,
+        "backgroundColor": "#FF2D00"
+      },
+      {
+        "tag": "/ ?",
+        "color": "#3498DB",
+        "strikethrough": false,
+        "backgroundColor": "transparent"
+      },
+      {
+        "tag": "/ = ?",
+        "color": "#FFFFFF",
+        "strikethrough": false,
+        "backgroundColor": "#3498DB"
+      },
+      {
+        "tag": "/ //",
+        "color": "#474747",
+        "strikethrough": true,
+        "backgroundColor": "transparent"
+      },
+      {
+        "tag": "/ todo",
+        "color": "#FF8C00",
+        "strikethrough": false,
+        "backgroundColor": "transparent"
+      },
+      {
+        "tag": "/ *",
+        "color": "#98C379",
+        "strikethrough": false,
+        "backgroundColor": "transparent"
+      },
+      {
+        "tag": "/ +",
+        "color": "#7600FF",
+        "strikethrough": false,
+        "backgroundColor": "transparent"
+      },
+      {
+        "tag": "/ = +",
+        "color": "#98C379",
+        "strikethrough": false,
+        "backgroundColor": "#7600FF"
+      },
+      {
+        "tag": "/ m",
+        "color": "#FF00FF",
+        "strikethrough": false,
+        "backgroundColor": "#trasparent"
+      },
+      {
+        "tag": "/ = m",
+        "color": "white",
+        "strikethrough": false,
+        "backgroundColor": "#FF00FF"
+      },
+      {
+        "tag": "/ b",
+        "color": "#436eee",
+        "strikethrough": false,
+        "backgroundColor": "#trasparent"
+      },
+      {
+        "tag": "/ = b",
+        "color": "white",
+        "strikethrough": false,
+        "backgroundColor": "#436eee"
+      },
+      {
+        "tag": "/ l",
+        "color": "#adff2f",
+        "strikethrough": false,
+        "backgroundColor": "#trasparent"
+      },
+      {
+        "tag": "/ = l",
+        "color": "black",
+        "strikethrough": false,
+        "backgroundColor": "#adff2f"
+      },
+      {
+        "tag": "/ y",
+        "color": "#ffd700",
+        "strikethrough": false,
+        "backgroundColor": "#trasparent"
+      },
+      {
+        "tag": "/ = y",
+        "color": "black",
+        "strikethrough": false,
+        "backgroundColor": "#ffd700"
+      },
+      {
+        "tag": "/ g",
+        "color": "#26d454",
+        "strikethrough": false,
+        "backgroundColor": "#trasparent"
+      },
+      {
+        "tag": "/ = g",
+        "color": "black",
+        "strikethrough": false,
+        "backgroundColor": "#26d454"
+      },
+      {
+        "tag": "/ o",
+        "color": "#f0970a",
+        "strikethrough": false,
+        "backgroundColor": "#trasparent"
+      },
+      {
+        "tag": "/ = o",
+        "color": "white",
+        "strikethrough": false,
+        "backgroundColor": "#f0970a"
+      },
+      {
+        "tag": "/ p",
+        "color": "#a70ee3",
+        "strikethrough": false,
+        "backgroundColor": "#trasparent"
+      },
+      {
+        "tag": "/ = p",
+        "color": "white",
+        "strikethrough": false,
+        "backgroundColor": "#a70ee3"
+      },
+      {
+        "tag": "/ i",
+        "color": "#0ee3d8",
+        "strikethrough": false,
+        "backgroundColor": "#trasparent"
+      },
+      {
+        "tag": "/ = i",
+        "color": "black",
+        "strikethrough": false,
+        "backgroundColor": "#0ee3d8"
+      },
+      {
+        "tag": "/ = STRT",
+        "color": "#000000",
+        "strikethrough": false,
+        "backgroundColor": "#00FF30"
+      },
+      {
+        "tag": "/ strt",
+        "color": "#00FF30",
+        "strikethrough": false,
+        "backgroundColor": "transparent"
+      },
+      {
+        "tag": "/ = END",
+        "color": "#FFFFFF",
+        "strikethrough": false,
+        "backgroundColor": "#FFA300"
+      },
+      {
+        "tag": "/ end",
+        "color": "#FFA300",
+        "strikethrough": false,
+        "backgroundColor": "transparent"
+      }
+    ],
+  }
+}
