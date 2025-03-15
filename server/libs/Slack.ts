@@ -5,17 +5,12 @@ import {
 } from "@slack/webhook";
 import { isAxiosError } from "axios";
 import createDebug from "debug";
-import pRetry, { FailedAttemptError, AbortError } from "p-retry";
 
 /// * utils
 import sleep from "../utils/sleep";
 
 /// * static
 import config from "../config";
-
-type RetryIncomingWebhookHTTPError =
-  | FailedAttemptError
-  | IncomingWebhookHTTPError;
 
 class Slack {
   /// y ***********************************
@@ -31,28 +26,36 @@ class Slack {
         return;
       }
 
-      await pRetry(() => this.notifier.send(data), {
-        retries: 5,
-        onFailedAttempt: async (error: RetryIncomingWebhookHTTPError) => {
+      let counter = 0;
+      const task = async () => {
+        try {
+          await this.notifier.send(data);
+        } catch (error: any) {
           const errorMessage = error.message;
           this.debug(errorMessage);
 
-          const webhookError = error as IncomingWebhookHTTPError;
-
-          if (
-            isAxiosError(webhookError.original) &&
-            webhookError.original.response
-          ) {
-            if (webhookError.original.response.status === 429) {
-              const seconds =
-                webhookError.original.response.headers["retry-after"];
-              await sleep(seconds * 1000);
-            }
+          if (counter >= 5) {
+            throw error;
           } else {
-            throw new AbortError(errorMessage);
+            const webhookError = error as IncomingWebhookHTTPError;
+
+            if (
+              isAxiosError(webhookError.original) &&
+              webhookError.original.response
+            ) {
+              if (webhookError.original.response.status === 429) {
+                const seconds =
+                  webhookError.original.response.headers["retry-after"];
+                await sleep(seconds * 1000);
+              }
+            } else {
+              throw error;
+            }
           }
-        },
-      });
+        }
+      };
+
+      await task();
     } catch (error: any) {
       this.debug(
         "Failed to send slack notification after 5 retries: %s",

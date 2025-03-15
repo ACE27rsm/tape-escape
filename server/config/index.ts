@@ -21,6 +21,9 @@ export interface IConfig {
     defaultChannel: string;
     defaultErrorChannel: string;
   };
+  tmdb: {
+    apiKey: string;
+  };
 }
 
 const config: IConfig = {
@@ -36,6 +39,9 @@ const config: IConfig = {
     icon_url: process.env.SLACK_ICON_URL || "",
     defaultChannel: process.env.SLACK_DEFAULT_CHANNEL || "",
     defaultErrorChannel: process.env.SLACK_DEFAULT_ERROR_CHANNEL || "",
+  },
+  tmdb: {
+    apiKey: process.env.TMDB_API_KEY || "",
   },
 };
 
