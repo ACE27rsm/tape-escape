@@ -1,17 +1,18 @@
-process.env.IS_PROCESSOR = 'true'
-import config from './config'
-import http from 'http'
+process.env.IS_PROCESSOR = "true";
+import config from "./config";
+import http from "http";
 
 /// * classes
-import Logger from './libs/Logger'
+import Logger from "./libs/Logger";
 // import SocketServer from './socketServer'
 
-const port = config.server.port
-const logger = new Logger('index')
+import app from "./app";
+const port = config.server.port;
+const logger = new Logger("index");
 /**
  * Create HTTP server.
  */
-const server = http.createServer()
+const server = http.createServer(app);
 
 /**
  * Setup Socket.io
@@ -19,28 +20,28 @@ const server = http.createServer()
 // SocketServer.init(server)
 
 Promise.resolve().then(async () => {
-  server.listen(port)
-  server.on('error', unexpectedErrorHandler)
-  server.on('listening', serverListeningHandler)
-})
+  server.listen(port);
+  server.on("error", unexpectedErrorHandler);
+  server.on("listening", serverListeningHandler);
+});
 
-process.on('unhandledRejection', unexpectedErrorHandler)
+process.on("unhandledRejection", unexpectedErrorHandler);
 
 function serverListeningHandler() {
-  logger.log({ message: 'HelloPack Processor app listening on port ' + port })
+  logger.log({ message: "TAPE-ESCAPE API listening on port " + port });
 }
 
 /**
  * Error handler for unhandled exceptions and promise rejections.
  */
 function unexpectedErrorHandler(error: Error) {
-  logger.error({ error })
+  logger.error({ error });
   if (server) {
     server.close(() => {
-      logger.error({ error: new Error('Server closed'), slack: true })
-      process.exit(1)
-    })
+      logger.error({ error: new Error("Server closed"), slack: true });
+      process.exit(1);
+    });
   } else {
-    process.exit(1)
+    process.exit(1);
   }
 }

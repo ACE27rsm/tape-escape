@@ -8,8 +8,11 @@ dotenv.config({
   path: path.resolve(__dirname, "..", ".env.local"),
 });
 export interface IConfig {
+  isProduction: boolean;
   server: {
+    origin: string;
     port: number;
+    url: string;
   };
   logger: {
     debugConsole: boolean;
@@ -26,9 +29,17 @@ export interface IConfig {
   };
 }
 
+const isProduction = process.env.NODE_ENV === "production";
+const serverPort = Number(process.env.SERVER_PORT || 27027);
+const serverOrigin = process.env.SERVER_ORIGIN || `http://localhost`;
+const serverURL = serverOrigin + (isProduction ? "" : `:${serverPort}`);
+
 const config: IConfig = {
+  isProduction,
   server: {
-    port: Number(process.env.SERVER_PORT || 27027),
+    port: serverPort,
+    origin: serverOrigin,
+    url: serverURL,
   },
   logger: {
     debugConsole: castStringToBoolean(process.env.DEBUG_CONSOLE),
