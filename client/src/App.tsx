@@ -1,17 +1,20 @@
 import { BrowserRouter } from "react-router";
 import Router from "./router/Router";
 import Layout from "./layout/Layout";
-import { Provider } from "./components/ui/provider";
+import { Provider as ChakraProvider } from "./components/ui/provider";
+import ReduxProvider from "./layout/redux-provider/ReduxProvider";
 
 function App() {
   return (
-    <Provider>
-      <BrowserRouter>
-        <Layout>
-          <Router />
-        </Layout>
-      </BrowserRouter>
-    </Provider>
+    <ReduxProvider>
+      <ChakraProvider>
+        <BrowserRouter>
+          <Layout>
+            <Router />
+          </Layout>
+        </BrowserRouter>
+      </ChakraProvider>
+    </ReduxProvider>
   );
 }
 

@@ -1,6 +1,8 @@
-process.env.IS_PROCESSOR = "true";
 import config from "./config";
 import http from "http";
+
+/// * soicketServer
+import SocketServer from "./libs/SocketServer";
 
 /// * classes
 import Logger from "./libs/Logger";
@@ -17,7 +19,7 @@ const server = http.createServer(app);
 /**
  * Setup Socket.io
  */
-// SocketServer.init(server)
+SocketServer.init(server);
 
 Promise.resolve().then(async () => {
   server.listen(port);
