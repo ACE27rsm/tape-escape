@@ -11,6 +11,8 @@ export interface IInputProps {
   InputProps?: React.ComponentProps<"input">;
   label?: string;
   endContent?: ReactNode;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
 }
 
 const input = (props: IInputProps) => {
@@ -18,7 +20,7 @@ const input = (props: IInputProps) => {
     <div
       className={cn([
         "flex flex-col",
-        "!border-4 !border-[#ff00ea] !rounded-md",
+        "!border-4 !border-[#ff00ea] !rounded-md !translate-z-96",
         props.classeNames?.base,
       ])}
     >
@@ -43,6 +45,8 @@ const input = (props: IInputProps) => {
             "!text-[1.5rem] h-8 outline-0",
             props.classeNames?.input,
           ])}
+          value={props.value}
+          onChange={props.onChange}
         />
         {props.endContent}
       </div>

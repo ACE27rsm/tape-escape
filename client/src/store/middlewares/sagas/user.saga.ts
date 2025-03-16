@@ -19,6 +19,7 @@ import {
   UI_ERROR_HANDLER,
   UI_SOCKET_START,
   UI_SOCKET_STOP,
+  UI_STATUS,
   USER_ERROR,
   USER_FETCHING,
   USER_LOGIN,
@@ -41,6 +42,7 @@ function* logInSaga(payload: IUserLoginPayload) {
   const { username, password } = payload;
   yield put(USER_FETCHING(true));
   try {
+    console.log({ payload });
     const response: AxiosResponse = yield call(Axios.post, "/auth/login", {
       username,
       password,
@@ -50,6 +52,7 @@ function* logInSaga(payload: IUserLoginPayload) {
     if (!isCancelled) {
       yield put(UI_SOCKET_START());
       yield put(USER_SET(response.data));
+      yield put(UI_STATUS("ready"));
     }
   } catch (error: any) {
     console.error(error);

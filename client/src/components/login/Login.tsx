@@ -1,12 +1,12 @@
 /// * utils
 import cn from "../../utils/cn";
-import { useEffect, useState } from "react";
+import { FormEvent, useCallback, useEffect, useState } from "react";
 
 /// * hooks
-import { UI_STATUS } from "../../store/actions";
+import { UI_STATUS, USER_LOGIN } from "../../store/actions";
 
 /// * hooks
-import { useAppDispatch } from "../../hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "../../hooks/useRedux";
 
 /// * components
 import Input from "../ui/input";
@@ -16,17 +16,48 @@ const Login = () => {
   /// y ***************************************************
   const dispatch = useAppDispatch();
   const [sateLastAction, setStateLastAction] = useState<number>(Date.now());
+  const [stateUsername, setStateUsername] = useState<string>("");
+  const [statePassword, setStatePassword] = useState<string>("");
+  const loginError = useAppSelector((state) => state.user.error);
 
   /// ? ***************************************************
   useEffect(() => {
     let timeOut = setTimeout(() => {
-      dispatch(UI_STATUS("intro"));
-    }, 10_000);
+      if (Date.now() - sateLastAction > 30_000) {
+        dispatch(UI_STATUS("intro"));
+      }
+    }, 1_000);
 
     return () => {
       clearTimeout(timeOut);
     };
   }, [sateLastAction]);
+
+  /// + ***************************************************
+  const handleLogin = useCallback(
+    (e: FormEvent) => {
+      e.preventDefault();
+      console.log("AAA", { username: stateUsername, password: statePassword });
+      dispatch(
+        USER_LOGIN({ username: stateUsername, password: statePassword })
+      );
+    },
+    [stateUsername, statePassword]
+  );
+
+  /// + ***************************************************
+  const handleChange = useCallback(
+    (type: "username" | "password", value: string) => {
+      if (type === "username") {
+        setStateUsername(value);
+      } else {
+        setStatePassword(value);
+      }
+
+      setStateLastAction(Date.now());
+    },
+    []
+  );
 
   /// m ***************************************************
   return (
@@ -39,17 +70,29 @@ const Login = () => {
     >
       <div className="text-center">LOGIN</div>
 
-      <Input
-        label="username"
-        InputProps={{ placeholder: "insert username..." }}
-      />
+      <form onSubmit={(e) => handleLogin(e)}>
+        <Input
+          label="username"
+          InputProps={{ placeholder: "insert username..." }}
+          value={stateUsername}
+          onChange={(e) => handleChange("username", e.target.value)}
+        />
 
-      <Input
-        label="username"
-        InputProps={{ placeholder: "insert password..", type: "password" }}
-      />
+        <Input
+          label="password"
+          InputProps={{ placeholder: "insert password..", type: "password" }}
+          value={statePassword}
+          onChange={(e) => handleChange("password", e.target.value)}
+        />
 
-      <Button onClick={() => console.log("CLICKKKK")}>LOGIN</Button>
+        <Button type="submit">LOGIN</Button>
+      </form>
+
+      {loginError && (
+        <div className="text-red-500 !text-lg  max-w-64 text-center">
+          {loginError}
+        </div>
+      )}
     </div>
   );
 };

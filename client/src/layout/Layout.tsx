@@ -1,21 +1,23 @@
-import { ReactNode, useRef } from "react";
-import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ReactNode, useEffect, useRef } from "react";
 
 /// * hooks
 import { useAppSelector } from "../hooks/useRedux";
 
-import NavBar from "./nav-bar/NavBar";
-import CRT from "./crt-effects/CRTEffects";
 import Login from "@/components/login/Login";
 
 /// * hooks
 import useMouseEvents from "../hooks/useMouseEvents";
 
 /// * components
-import LayoutIntro from "./Layout.Intro";
+import LoadingBar from "@/components/loading-bar/LoadingBar";
+import Startup from "@/components/startup/Startup";
+import Intro from "../components/intro/Intro";
 import LayoutDesign from "./Layout.Design";
 import LayoutMonitor from "./Layout.Monitor";
+import { Box } from "@chakra-ui/react";
+import { useNavigate } from "react-router";
 
 gsap.registerPlugin(useGSAP);
 
@@ -23,33 +25,14 @@ const Layout = ({ children }: { children: ReactNode }) => {
   /// y ***************************************************
   const container = useRef<HTMLElement>(null);
   const uiStatus = useAppSelector((state) => state.ui.status);
+  const navigate = useNavigate();
+  const isLoggedIn = useAppSelector((state) => !!state.user.username);
   useMouseEvents();
 
   /// ? ***************************************************
-  useGSAP(
-    () => {
-      // gsap code here...
-      const tl = gsap.timeline();
-
-      const logoAnimation = function () {
-        tl.to("#logo", { opacity: 0, duration: 0.01 }, ">0.2");
-        tl.to("#logo", { opacity: 1, duration: 0.01 }, ">0.3");
-        tl.to("#broken-logo", { opacity: 1, duration: 0.1 }, ">1");
-        tl.to("#broken-logo", { opacity: 0, duration: 0.1 }, ">0.1");
-        tl.to("#broken-logo", { opacity: 1, duration: 0.1 }, ">1.5");
-        tl.to("#broken-logo", { opacity: 0, duration: 0.1 }, ">1");
-        tl.to("#logo", { opacity: 0, duration: 0.01 }, ">0.2");
-        tl.to(
-          "#logo",
-          { opacity: 1, duration: 0.01, onComplete: () => logoAnimation() },
-          ">0.01"
-        );
-      };
-
-      logoAnimation();
-    },
-    { scope: container }
-  );
+  useEffect(() => {
+    navigate("/");
+  }, []);
 
   /// m ***************************************************
   return (
@@ -74,8 +57,22 @@ const Layout = ({ children }: { children: ReactNode }) => {
         >
           <LayoutDesign>
             <LayoutMonitor>
-              {uiStatus === "intro" && <LayoutIntro />}
-              {uiStatus === "login" && <Login />}
+              <Box
+                className="overflow-y-auto h-full !p-10 relative"
+                bg={
+                  uiStatus === "init"
+                    ? "gray.800"
+                    : uiStatus === "loading"
+                      ? "gray.500"
+                      : "yellow.500"
+                }
+              >
+                {uiStatus === "init" && <Startup />}
+                {uiStatus === "loading" && <LoadingBar />}
+                {uiStatus === "intro" && <Intro />}
+                {uiStatus === "login" && <Login />}
+                {isLoggedIn && children}
+              </Box>
             </LayoutMonitor>
           </LayoutDesign>
         </div>

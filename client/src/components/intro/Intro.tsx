@@ -3,15 +3,15 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 /// * components
-import { Button } from "../components/ui/button";
+import { Button } from "../ui/button";
 
 /// * actions
-import { UI_STATUS } from "../store/actions";
+import { UI_STATUS } from "../../store/actions";
 
 /// * hooks
-import { useAppDispatch } from "../hooks/useRedux";
+import { useAppDispatch } from "../../hooks/useRedux";
 
-const LayoutIntro = () => {
+const Intro = () => {
   /// y ***************************************************
   const dispatch = useAppDispatch();
 
@@ -65,4 +65,4 @@ const LayoutIntro = () => {
   );
 };
 
-export default LayoutIntro;
+export default Intro;

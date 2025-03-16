@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Perfect DOS VGA 437";
+  src: url(fonts/perfect-dos-vga437.woff2) format("woff2");
+}
+
+.bios {
+  font-family: "Perfect DOS VGA 437", monospace;
+  font-size: 22px;
+  color: #AAA;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  margin: 0;
+  line-height: 1.2rem;
+}
+
 body {
   /* transform: skew(60deg, 60deg); */
   font-family: "Pixelify Sans", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;

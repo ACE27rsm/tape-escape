@@ -36,6 +36,7 @@ const slice = createSlice({
       user.firstName = payload.firstName;
       user.lastName = payload.lastName;
       user.avatar = payload.avatar;
+      user.error = "";
     },
 
     /// o *******************************************************
