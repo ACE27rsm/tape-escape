@@ -1,9 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export type TStatus = "init" | "starting" | "loading" | "intro" | "ready";
+export type TStatus =
+  | "init"
+  | "starting"
+  | "loading"
+  | "intro"
+  | "login"
+  | "ready";
 
-const init = () => ({
-  status: "init",
+export interface IUIState {
+  status: TStatus;
+}
+
+const init = (): IUIState => ({
+  status: "intro",
 });
 
 const slice = createSlice({

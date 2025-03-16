@@ -14,18 +14,18 @@ import { IUser, IUserWithoutPassword } from "../../types/User.types";
 const logger = new Logger("auth");
 
 class Auth {
+  /// y ***************************************************
+  static cookieName = "tape-escape-jwt";
+
   /// o ***************************************************
-  static async login(
-    username: string,
-    password: string
-  ): Promise<IUserWithoutPassword> {
+  static async login(username: string, password: string): Promise<User> {
     const user = await User.getUser(username);
 
     if (user) {
       const isPasswordCorrect = await this.comparePasswords(user, password);
 
       if (isPasswordCorrect) {
-        return _.omit(user, "password");
+        return user;
       } else {
         throw httpErrors(httpStatus.UNAUTHORIZED, "Invalid password");
       }
@@ -33,14 +33,14 @@ class Auth {
       throw httpErrors(httpStatus.UNAUTHORIZED, "User not found");
     }
   }
-  
+
   /// o ***************************************************
-  static async verifyJWT(jwt: string): Promise<IUserWithoutPassword> {
+  static async verifyJWT(jwt: string): Promise<User> {
     const decoded = await JWT.verify(jwt);
     const user = await User.getUser(decoded.username);
 
     if (user) {
-      return _.omit(user, "password");
+      return user;
     } else {
       throw httpErrors(httpStatus.UNAUTHORIZED, "User not found");
     }

@@ -4,6 +4,7 @@ import io, { Socket } from "socket.io";
 
 /// * classes
 import Logger, { EConsoleColorName } from "./Logger";
+import Auth from "./Auth";
 
 /// * config
 import config from "../config";
@@ -23,9 +24,6 @@ class SocketServer {
   /// o ******************************************************************************
   /// o ******************************************************************************
   /// o ******************************************************************************
-  /**
-   * ATTENZIONE! La funzione init deve essere usata dal file www.js che inizializza il server.
-   */
   static init(httpServer: http.Server): void {
     if (this.#instance) {
       return;
@@ -42,29 +40,32 @@ class SocketServer {
     });
 
     this.#instance.on("connection", async (clientSocket: Socket) => {
-      logger.log({
-        message: `Connessione client socket.io id ${clientSocket.id}`,
-      });
+      try {
+        logger.log({
+          message: `Connessione client socket.io id ${clientSocket.id}`,
+        });
 
-      const cookies = cookie.parse(
-        String(clientSocket.handshake.headers.cookie || "")
-      );
+        const cookies = cookie.parse(
+          String(clientSocket.handshake.headers.cookie || "")
+        );
 
-      clientSocket.join(clientSocket.id);
+        const user = await Auth.verifyJWT(cookies[Auth.cookieName] || "");
+        if (user) {
+          logger.log({
+            message: `Utente ${user.username} connesso alla socket`,
+          });
+
+          user.subscribeToSocketIoRooms(clientSocket);
+        }
+      } catch (error: any) {
+        clientSocket.disconnect(error.statusCode);
+      }
     });
   }
 
   /// b ******************************************************************************
   /// b ******************************************************************************
   /// b ******************************************************************************
-  /**
-   * Usare proprietà "user._id" per indicare il destinatario.
-   *
-   * @param {IUser} [params.user] - utente
-   * @param {string} params.event - Nome evento
-   * @param {any} params.data - Dati dell'evento
-   * @param {boolean} [params.wholeCompany] - Dati dell'evento
-   */
   static async emitToUser(params: {
     clientId: string;
     event: string;

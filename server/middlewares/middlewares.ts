@@ -12,7 +12,7 @@ class Middlewares {
         throw httpErrors(httpStatus.UNAUTHORIZED, "Missing JWT");
       }
 
-      req.user = await Auth.verifyJWT(jwt);
+      req.user = (await Auth.verifyJWT(jwt)).data;
       next();
     } catch (error) {
       next(error);

@@ -1,6 +1,8 @@
 import fs from "fs/promises";
 
 import Logger from "./Logger";
+import { IUserWithoutPassword } from "../../types/User.types";
+import { Socket } from "socket.io";
 
 const logger = new Logger("user");
 
@@ -60,6 +62,29 @@ class User {
     this.lastName = lastName;
     this.password = password;
     this.avatar = avatar;
+  }
+
+  /// y ***************************************************
+  get data(): IUserWithoutPassword {
+    return {
+      username: this.username,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      avatar: this.avatar,
+    };
+  }
+
+  /// y ***************************************************
+  get getSocketIoUserRoom() {
+    return `user-${this.username}`;
+  }
+
+  /// y ***************************************************
+  subscribeToSocketIoRooms(clientSocket: Socket): void {
+    clientSocket.join(this.getSocketIoUserRoom);
+    logger.debug(
+      `L'utente ${this.username} è entrato nella stanza socket.io ${this.getSocketIoUserRoom}`
+    );
   }
 }
 

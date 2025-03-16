@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+body {
+  /* transform: skew(60deg, 60deg); */
+  font-family: "Pixelify Sans", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+}
