@@ -1,0 +1,1 @@
+[{"username":"pjfry","firstName":"Philip J.","lastName":"Fry","password":"$2b$10$etALu6kqI7oDc9QiNG/S8e3iDJXqb0JnWdgVPqPM.3By9xDckt8di","avatar":"/images/avatars/pjfry.jpg"}]

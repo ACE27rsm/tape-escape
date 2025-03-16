@@ -27,6 +27,9 @@ export interface IConfig {
   tmdb: {
     apiKey: string;
   };
+  jwt: {
+    secret: string;
+  };
 }
 
 const isProduction = process.env.NODE_ENV === "production";
@@ -53,6 +56,9 @@ const config: IConfig = {
   },
   tmdb: {
     apiKey: process.env.TMDB_API_KEY || "",
+  },
+  jwt: {
+    secret: process.env.JWT_SECRET || "",
   },
 };
 

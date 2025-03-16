@@ -9,7 +9,6 @@ const ReduxProviderDispatchers = () => {
   /// ? *****************************************
   useEffect(() => {
     dispatch(UI_SEND_TEST_REQUEST());
-    dispatch(UI_SOCKET_START());
   }, []);
 
   return null;

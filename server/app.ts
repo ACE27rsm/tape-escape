@@ -16,6 +16,7 @@ function errorHandler(
   res: Response,
   next: NextFunction
 ) {
+  console.error(err);
   // Restituisci direttamente gli errori creati con il modulo http-errors
   if (httpErrors.isHttpError(err)) {
     return res.status(err.status).json(err.message);
@@ -61,9 +62,6 @@ app.use(routes);
 
 // infine, gestione errori
 //@ts-ignore
-app.use(() => {
-  debugger;
-  errorHandler();
-});
+app.use(errorHandler);
 
 export default app;

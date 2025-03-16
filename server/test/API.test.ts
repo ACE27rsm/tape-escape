@@ -13,6 +13,11 @@ test("server test success route", async () => {
   expect(data).toEqual({ messsage: "success" });
 });
 
-// test("server test error route", async () => {
-//   expect(await APIAxios.get("/test/error")).toBe(axios.AxiosError);
-// });
+test("server auth login route", async () => {
+  const response = await APIAxios.post("/auth/login", {
+    username: "pjfry",
+    password: "password",
+  });
+
+  console.log(response);
+});
