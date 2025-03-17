@@ -1,6 +1,5 @@
-import { Box } from "@chakra-ui/react";
-import React from "react";
 import { FaGithub } from "react-icons/fa";
+import { PiCowBold } from "react-icons/pi";
 
 const Footer = () => {
   return (
@@ -16,7 +15,16 @@ const Footer = () => {
             <FaGithub />
           </a>
         </div>
-        <div>Graphic Design: Lucia Zavatta </div>
+        <div className="flex items-center gap-2">
+          Graphic Design: Lucia Zavatta{" "}
+          <a
+            href="https://www.luciazavatta.com"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <PiCowBold />
+          </a>
+        </div>
       </div>
       <div>Powerd by TMDB</div>
     </div>

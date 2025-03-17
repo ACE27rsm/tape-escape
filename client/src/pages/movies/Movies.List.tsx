@@ -36,7 +36,7 @@ const MoviesList = () => {
           )}
           onClick={() => handelSelect(movie.id)}
         >
-          {movie.title}
+          <div className="!text-xl truncate">{movie.title}</div>
         </div>
       ))}
     </div>

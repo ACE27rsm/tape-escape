@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/useRedux";
 
 /// * actions
 import { MOVIES_DETAILS_GET } from "../../store/actions";
+import { Badge } from "@chakra-ui/react";
 
 const MoviesDetails = () => {
   /// y ***************************************************
@@ -33,6 +34,8 @@ const MoviesDetails = () => {
     return score;
   }, [movieSelected?.vote_average]);
 
+  if (!movieSelected) return null;
+
   return (
     <div className="grow bg-amber-700 h-full overflow-auto">
       <div
@@ -45,9 +48,21 @@ const MoviesDetails = () => {
         }}
       >
         <div className="!z-10 h-full bg-[#00000080] !p-8 !text-white w-full">
-          <h3 className="font-bold !text-6xl truncate">
-            {movieSelected?.title}
-          </h3>
+          <div className="!mb-2">
+            <h3 className="font-bold !text-6xl truncate">
+              {movieSelected?.title}
+            </h3>
+
+            {movieSelected.genres.length > 0 && (
+              <div className="flex gap-4">
+                {movieSelected.genres.map((genre) => (
+                  <Badge key={genre.id} className="!text-2xl">
+                    {genre.name}
+                  </Badge>
+                ))}
+              </div>
+            )}
+          </div>
           <div className="flex gap-4 w-full flex-col md:flex-row">
             <div className="w-64 shrink-0">
               <img
@@ -57,20 +72,21 @@ const MoviesDetails = () => {
               />
             </div>
             <div className="grow">
-              {movieSelected?.vote_count && movieSelected?.vote_count > 0 && (
-                <>
-                  <div className="flex w-full justify-between gap-8 !border-b-2 !border-solid !border-white !text-2xl">
-                    <div className="!font-bold w-64 shrink-0">Score:</div>
-                    <div>{score}</div>
-                  </div>
-                  <div className="flex w-full justify-between gap-8 !border-b-2 !border-solid !border-white !text-2xl">
-                    <div className="!font-bold w-64 shrink-0">
-                      Number of Reviews:
+              {movieSelected?.vote_count !== undefined &&
+                movieSelected?.vote_count > 0 && (
+                  <>
+                    <div className="flex w-full justify-between gap-8 !border-b-2 !border-solid !border-white !text-2xl">
+                      <div className="!font-bold w-64 shrink-0">Score:</div>
+                      <div>{score}</div>
                     </div>
-                    <div>{movieSelected.vote_count}</div>
-                  </div>
-                </>
-              )}
+                    <div className="flex w-full justify-between gap-8 !border-b-2 !border-solid !border-white !text-2xl">
+                      <div className="!font-bold w-64 shrink-0">
+                        Number of Reviews:
+                      </div>
+                      <div>{movieSelected.vote_count}</div>
+                    </div>
+                  </>
+                )}
               <div className="flex w-full justify-between gap-8 !border-b-2 !border-solid !border-white !text-2xl">
                 <div className="!font-bold w-64 shrink-0">Original Title:</div>
                 <div>{movieSelected?.original_title}</div>

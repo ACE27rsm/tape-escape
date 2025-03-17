@@ -11,6 +11,9 @@ import { useAppDispatch } from "../../hooks/useRedux";
 import { Box, Text } from "@chakra-ui/react";
 import { UI_STATUS } from "../../store/actions";
 
+/// * components
+import LottieAnimation from "../lottie-animation/LottieAnimation";
+
 const LoadingBar = () => {
   /// y ***************************************************
   const dispatch = useAppDispatch();
@@ -38,12 +41,15 @@ const LoadingBar = () => {
   /// m ***************************************************
   return (
     <Box className="w-full h-full flex justify-center items-center flex-col">
-      <Text className="!text-8xl !text-primary" color="pink.focusRing">
+      <Text className="!text-8xl !text-primary" color="#8103ff">
         LOADING
       </Text>
-      <div className="w-96 flex justify-center gap-4 [&>div]:bg-[#ff00ea] !mt-5">
+      <div className="flex justify-center gap-2 [&>div]:bg-[white] !mt-5">
         <motion.div
-          className="w-10 h-10 opacity-0 rounded-full"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%238103ff' stroke-width='7' stroke-dasharray='10%2c 1' stroke-dashoffset='0' stroke-linecap='butt'/%3e%3c/svg%3e")`,
+          }}
+          className="w-10 h-10 opacity-0"
           variants={{
             hidden: { opacity: 0 },
             visible: { opacity: 1 },
@@ -53,7 +59,10 @@ const LoadingBar = () => {
           transition={{ duration: 0.5 }}
         />
         <motion.div
-          className="w-10 h-10 opacity-0 rounded-full"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%238103ff' stroke-width='7' stroke-dasharray='10%2c 1' stroke-dashoffset='0' stroke-linecap='butt'/%3e%3c/svg%3e")`,
+          }}
+          className="w-10 h-10 opacity-0"
           variants={{
             hidden: { opacity: 0 },
             visible: { opacity: 1 },
@@ -63,7 +72,10 @@ const LoadingBar = () => {
           transition={{ duration: 0.5 }}
         />
         <motion.div
-          className="w-10 h-10 opacity-0 rounded-full"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%238103ff' stroke-width='7' stroke-dasharray='10%2c 1' stroke-dashoffset='0' stroke-linecap='butt'/%3e%3c/svg%3e")`,
+          }}
+          className="w-10 h-10 opacity-0"
           variants={{
             hidden: { opacity: 0 },
             visible: { opacity: 1 },
@@ -73,7 +85,10 @@ const LoadingBar = () => {
           transition={{ duration: 0.5 }}
         />
         <motion.div
-          className="w-10 h-10 opacity-0 rounded-full"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%238103ff' stroke-width='7' stroke-dasharray='10%2c 1' stroke-dashoffset='0' stroke-linecap='butt'/%3e%3c/svg%3e")`,
+          }}
+          className="w-10 h-10 opacity-0"
           variants={{
             hidden: { opacity: 0 },
             visible: { opacity: 1 },
@@ -83,7 +98,10 @@ const LoadingBar = () => {
           transition={{ duration: 0.5 }}
         />
         <motion.div
-          className="w-10 h-10 opacity-0 rounded-full"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%238103ff' stroke-width='7' stroke-dasharray='10%2c 1' stroke-dashoffset='0' stroke-linecap='butt'/%3e%3c/svg%3e")`,
+          }}
+          className="w-10 h-10 opacity-0"
           variants={{
             hidden: { opacity: 0 },
             visible: { opacity: 1 },
@@ -93,7 +111,10 @@ const LoadingBar = () => {
           transition={{ duration: 0.5 }}
         />
         <motion.div
-          className="w-10 h-10 opacity-0 rounded-full"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%238103ff' stroke-width='7' stroke-dasharray='10%2c 1' stroke-dashoffset='0' stroke-linecap='butt'/%3e%3c/svg%3e")`,
+          }}
+          className="w-10 h-10 opacity-0"
           variants={{
             hidden: { opacity: 0 },
             visible: { opacity: 1 },
@@ -103,7 +124,10 @@ const LoadingBar = () => {
           transition={{ duration: 0.5 }}
         />
         <motion.div
-          className="w-10 h-10 opacity-0 rounded-full"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%238103ff' stroke-width='7' stroke-dasharray='10%2c 1' stroke-dashoffset='0' stroke-linecap='butt'/%3e%3c/svg%3e")`,
+          }}
+          className="w-10 h-10 opacity-0"
           variants={{
             hidden: { opacity: 0 },
             visible: { opacity: 1 },
@@ -113,7 +137,10 @@ const LoadingBar = () => {
           transition={{ duration: 0.5 }}
         />
         <motion.div
-          className="w-10 h-10 opacity-0 rounded-full"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%238103ff' stroke-width='7' stroke-dasharray='10%2c 1' stroke-dashoffset='0' stroke-linecap='butt'/%3e%3c/svg%3e")`,
+          }}
+          className="w-10 h-10 opacity-0"
           variants={{
             hidden: { opacity: 0 },
             visible: { opacity: 1 },
@@ -123,7 +150,10 @@ const LoadingBar = () => {
           transition={{ duration: 0.5 }}
         />
         <motion.div
-          className="w-10 h-10 opacity-0 rounded-full"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%238103ff' stroke-width='7' stroke-dasharray='10%2c 1' stroke-dashoffset='0' stroke-linecap='butt'/%3e%3c/svg%3e")`,
+          }}
+          className="w-10 h-10 opacity-0"
           variants={{
             hidden: { opacity: 0 },
             visible: { opacity: 1 },
@@ -133,7 +163,10 @@ const LoadingBar = () => {
           transition={{ duration: 0.5 }}
         />
         <motion.div
-          className="w-10 h-10 opacity-0 rounded-full"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%238103ff' stroke-width='7' stroke-dasharray='10%2c 1' stroke-dashoffset='0' stroke-linecap='butt'/%3e%3c/svg%3e")`,
+          }}
+          className="w-10 h-10 opacity-0"
           variants={{
             hidden: { opacity: 0 },
             visible: { opacity: 1 },
@@ -143,6 +176,9 @@ const LoadingBar = () => {
           transition={{ duration: 0.5 }}
           onAnimationComplete={handleComplete}
         />
+      </div>
+      <div className="!mt-4 w-56 h-56">
+        <LottieAnimation animationPath="/lotties/hourglass.json" loop />
       </div>
     </Box>
   );
