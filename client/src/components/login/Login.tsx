@@ -25,7 +25,7 @@ const Login = () => {
   /// ? ***************************************************
   useEffect(() => {
     let timeOut = setTimeout(() => {
-      if (Date.now() - sateLastAction > 30_000) {
+      if (Date.now() - sateLastAction > 10_000) {
         navigate("/");
       }
     }, 1_000);

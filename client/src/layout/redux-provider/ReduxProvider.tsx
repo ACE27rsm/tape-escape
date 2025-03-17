@@ -1,15 +1,40 @@
-import { ReactNode } from "react";
+import { ReactNode, useLayoutEffect, useState } from "react";
 import { Provider } from "react-redux";
-import { AppStore, makeStore } from "../../store/";
-import { HistoryRouter } from "redux-first-history/rr6";
 
 /// * store
-import { history } from "../../store";
+import { history, store } from "../../store";
 
 /// * components
 import Dispatchers from "./ReduxProvider.Dispatchers";
+import { History } from "history";
+import { Router } from "react-router";
 
-const store: AppStore = makeStore();
+export type Props = {
+  basename?: string;
+  history: History;
+  children?: ReactNode;
+};
+
+export const HistoryRouter = (props: Props) => {
+  const { basename, children, history } = props;
+  const [historyState, setHistoryState] = useState({
+    action: history.action,
+    location: history.location,
+  });
+
+  useLayoutEffect(() => history.listen(setHistoryState), [history]);
+
+  return (
+    <Router
+      basename={basename}
+      location={historyState.location}
+      navigationType={historyState.action}
+      navigator={history}
+    >
+      {children}
+    </Router>
+  );
+};
 
 const ReduxProvider = ({ children }: { children: ReactNode }) => {
   return (

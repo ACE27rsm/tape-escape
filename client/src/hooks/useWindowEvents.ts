@@ -1,12 +1,21 @@
 import { useEffect } from "react";
 
-function useMouseEvents() {
+function useWindowEvents() {
   /// ? *****************************************
   useEffect(() => {
     function handleMouseClick(e: MouseEvent) {
       console.log("Mouse clicked", e.target);
-      //   e.stopPropagation();
-      //   e.preventDefault();
+
+      // setTimeout(() => {
+      //   const menuElements = document.querySelectorAll(
+      //     "[data-scope=menu][data-part=positioner]"
+      //   );
+      //   console.log(menuElements);
+
+      //   menuElements.forEach((menuElement) => {
+      //     menuElement.style.zIndex = -1
+      //   });
+      // }, 10);
     }
 
     window.addEventListener("click", handleMouseClick, true);
@@ -32,4 +41,4 @@ function useMouseEvents() {
   }, []);
 }
 
-export default useMouseEvents;
+export default useWindowEvents;

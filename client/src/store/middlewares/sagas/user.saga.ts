@@ -93,7 +93,7 @@ function* logOutSaga() {
     } catch (error) {
       logger.debugError(error);
     } finally {
-      yield all([put(USER_RESET()), put(UI_SOCKET_STOP())]);
+      yield all([put(USER_RESET()), put(UI_SOCKET_STOP()), put(push("/login"))]);
     }
   }
   yield takeEvery(USER_LOGOUT.type, logOut);

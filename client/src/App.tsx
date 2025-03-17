@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router";
+import { Route, Routes } from "react-router";
 import { Provider as ChakraProvider } from "./components/ui/provider";
 import ReduxProvider from "./layout/redux-provider/ReduxProvider";
 
@@ -12,17 +12,15 @@ function App() {
   return (
     <ReduxProvider>
       <ChakraProvider>
-        <BrowserRouter>
-          <Layout>
-            <Routes>
-              <Route path="/">
-                <Route path="" element={<Intro />} />
-                <Route path="login" element={<Login />} />
-                <Route path="*" element={<ProtectedRoute />} />
-              </Route>
-            </Routes>
-          </Layout>
-        </BrowserRouter>
+        <Layout>
+          <Routes>
+            <Route path="/">
+              <Route path="" element={<Intro />} />
+              <Route path="login" element={<Login />} />
+              <Route path="*" element={<ProtectedRoute />} />
+            </Route>
+          </Routes>
+        </Layout>
       </ChakraProvider>
     </ReduxProvider>
   );
