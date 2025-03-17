@@ -3,7 +3,7 @@ import { createAction, ActionCreatorWithPayload } from "@reduxjs/toolkit";
 /// * from slice
 import { actions } from "../reducers/ui.reducer";
 
-export const { UI_STATUS } = actions;
+export const { UI_STATUS, UI_BLUE_SCREEN } = actions;
 
 export const UI_SEND_TEST_REQUEST = createAction("ui/UI_SEND_TEST_REQUEST");
 

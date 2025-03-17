@@ -9,7 +9,7 @@ import NavBar from "@/layout/nav-bar/NavBar";
 
 const Router = () => {
   return (
-    <div className="">
+    <div className="h-full">
       <NavBar />
       
       <Routes>

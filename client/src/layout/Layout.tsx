@@ -26,6 +26,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
   /// y ***************************************************
   const container = useRef<HTMLElement>(null);
   const uiStatus = useAppSelector((state) => state.ui.status);
+  const isBlueScreen = useAppSelector((state) => state.ui.blueScreen);
   const navigate = useNavigate();
   useWindowEvents();
 
@@ -133,7 +134,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
         >
           <div className="w-full h-full relative">
             <div className="!rounded-4xl overflow-hidden h-full relative !border-black-500 !border-r-8 !border-t-8 !border-l-8 opacity-100">
-              <div className="absolute w-full h-full top-0 left-0 bg-[#66ff00] pointer-events-none !z-5000 opacity-15"></div>
+              <div className="absolute w-full h-full top-0 left-0 bg-[#66ff00] pointer-events-none !z-5000 opacity-20"></div>
               <div
                 className="absolute w-full h-full top-0 left-0 pointer-events-none opacity-55"
                 style={{
@@ -144,6 +145,14 @@ const Layout = ({ children }: { children: ReactNode }) => {
             </div>
           </div>
         </div>
+
+        {isBlueScreen && (
+          <div className="w-full h-full relative">
+            <div className="absolute top-0 left-0 w-full h-full bg-blue-500 flex justify-center items-center !z=[10000]">
+              <div className="text-white text-2xl font-bold">Blue Screen</div>
+            </div>
+          </div>
+        )}
       </main>
     </>
   );

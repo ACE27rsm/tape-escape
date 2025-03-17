@@ -1,21 +1,24 @@
 import { useEffect } from "react";
 
+/// * hooks
+import { useAppDispatch } from "./useRedux";
+
+/// * libs
+import LoggerClient from "../libs/LoggerClient";
+
+/// * actions
+import { UI_BLUE_SCREEN } from "../store/actions";
+
+const logger = new LoggerClient("useWindowEvents", { color: "pink" });
+
 function useWindowEvents() {
+  /// y *****************************************
+  const dispatch = useAppDispatch();
+
   /// ? *****************************************
   useEffect(() => {
     function handleMouseClick(e: MouseEvent) {
-      console.log("Mouse clicked", e.target);
-
-      // setTimeout(() => {
-      //   const menuElements = document.querySelectorAll(
-      //     "[data-scope=menu][data-part=positioner]"
-      //   );
-      //   console.log(menuElements);
-
-      //   menuElements.forEach((menuElement) => {
-      //     menuElement.style.zIndex = -1
-      //   });
-      // }, 10);
+      logger.debug("Mouse clicked", e.target);
     }
 
     window.addEventListener("click", handleMouseClick, true);
@@ -28,15 +31,35 @@ function useWindowEvents() {
   /// ? *****************************************
   useEffect(() => {
     function handleScroll() {
-      console.log("scroll");
-      //   e.stopPropagation();
-      //   e.preventDefault();
+      logger.debug("scroll");
     }
 
     window.addEventListener("scroll", handleScroll, true);
 
     return () => {
       window.removeEventListener("scroll", handleScroll, true);
+    };
+  }, []);
+
+  /// ? *****************************************
+  useEffect(() => {
+    function handleResize() {
+      logger.debug("resize");
+
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+
+      if (width < 1100 || height < 800) {
+        dispatch(UI_BLUE_SCREEN(true));
+      } else {
+        dispatch(UI_BLUE_SCREEN(false));
+      }
+    }
+
+    window.addEventListener("resize", handleResize, true);
+
+    return () => {
+      window.removeEventListener("resize", handleResize, true);
     };
   }, []);
 }
