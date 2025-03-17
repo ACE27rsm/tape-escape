@@ -24,14 +24,14 @@ const Login = () => {
 
   /// ? ***************************************************
   useEffect(() => {
-    let timeOut = setTimeout(() => {
+    let interval = setInterval(() => {
       if (Date.now() - sateLastAction > 10_000) {
         navigate("/");
       }
     }, 1_000);
 
     return () => {
-      clearTimeout(timeOut);
+      clearInterval(interval);
     };
   }, [sateLastAction]);
 
