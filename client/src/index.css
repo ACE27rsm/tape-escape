@@ -8,7 +8,7 @@
 .bios {
   font-family: "Perfect DOS VGA 437", monospace;
   font-size: 22px;
-  color: #AAA;
+  color: #aaa;
   display: flex;
   justify-content: center;
   overflow: hidden;

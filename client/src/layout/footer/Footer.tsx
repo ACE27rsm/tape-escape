@@ -4,7 +4,7 @@ import { FaGithub } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <div className="h-max !p-2 !px-6 flex justify-between items-center !text-pink-500 !text-sm !font-semibold ">
+    <div className="h-max !p-2 !px-6 flex justify-between items-center !text-[#8103ff] !text-sm !font-semibold ">
       <div>
         <div className="flex items-center gap-2">
           Author: Daniele Salvatori{" "}

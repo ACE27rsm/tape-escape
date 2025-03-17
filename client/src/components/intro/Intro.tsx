@@ -2,9 +2,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useCallback } from "react";
 import { useNavigate } from "react-router";
-
-/// * components
-import { Button } from "../ui/button";
+import { motion } from "framer-motion";
 
 const Intro = () => {
   /// y ***************************************************
@@ -53,8 +51,17 @@ const Intro = () => {
         className="absolute top-0 left-0 w-full !h-full object-cover opacity-0"
       />
 
-      <div className="absolute top-0 left-0 w-full h-full flex justify-center items-end !pb-8">
-        <Button onClick={handleStartLogin}>START</Button>
+      <div
+        className="absolute top-0 left-0 w-full h-full flex justify-center items-end !pb-14 !translate-z-96 cursor-pointer"
+        onClick={handleStartLogin}
+      >
+        <motion.div
+          className="!text-6xl"
+          animate={{ opacity: [0, 1, 0] }}
+          transition={{ duration: 0.01, repeat: Infinity, delay: 1 }}
+        >
+          PRESS ANY KEY
+        </motion.div>
       </div>
     </>
   );

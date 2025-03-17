@@ -70,12 +70,18 @@ const Login = () => {
         "!text-5xl",
       ])}
     >
-      <div className="text-center">LOGIN</div>
+      <div className="text-center !text-9xl">LOGIN</div>
 
-      <form onSubmit={(e) => handleLogin(e)}>
+      <form
+        onSubmit={(e) => handleLogin(e)}
+        className="flex flex-col gap-4 w-[500px]"
+      >
         <Input
           label="username"
           InputProps={{ placeholder: "insert username..." }}
+          classeNames={{
+            label: ["!text-2xl"],
+          }}
           value={stateUsername}
           onChange={(e) => handleChange("username", e.target.value)}
         />
@@ -83,15 +89,18 @@ const Login = () => {
         <Input
           label="password"
           InputProps={{ placeholder: "insert password..", type: "password" }}
+          classeNames={{
+            label: ["!text-2xl"],
+          }}
           value={statePassword}
           onChange={(e) => handleChange("password", e.target.value)}
         />
 
-        <Button type="submit">LOGIN</Button>
+        <Button type="submit">START</Button>
       </form>
 
       {loginError && (
-        <div className="text-red-500 !text-lg  max-w-64 text-center">
+        <div className="text-red-500 !text-lg  max-w-96 text-center">
           {loginError}
         </div>
       )}

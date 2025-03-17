@@ -23,12 +23,12 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const { loading, disabled, loadingText, children, ...rest } = props;
     return (
       <ChakraButton
-        className="!translate-z-96 !bg-red-500 hover:!bg-yellow-500"
+        className="!translate-z-96 !bg-[#8103ff] hover:!bg-pink-500 !text-white"
         disabled={loading || disabled}
         ref={ref}
         {...rest}
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23EC3463' stroke-width='7' stroke-dasharray='10%2c 1' stroke-dashoffset='0' stroke-linecap='butt'/%3e%3c/svg%3e")`,
+          backgroundImage: `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23FFF' stroke-width='7' stroke-dasharray='10%2c 1' stroke-dashoffset='0' stroke-linecap='butt'/%3e%3c/svg%3e")`,
         }}
       >
         {loading && !loadingText ? (
@@ -44,7 +44,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             {loadingText}
           </>
         ) : (
-          children
+          <div className="!text-2xl">{children}</div>
         )}
       </ChakraButton>
     );
@@ -58,12 +58,12 @@ export const IconButton = React.forwardRef<
   const { loading, disabled, loadingText, children, ...rest } = props;
   return (
     <ChakraIconButton
-      className="!translate-z-96 !bg-red-500 hover:!bg-yellow-500"
+      className="!translate-z-96 !bg-[#8103ff] hover:!bg-pink-500 !text-white"
       disabled={loading || disabled}
       ref={ref}
       {...rest}
       style={{
-        backgroundImage: `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23EC3463' stroke-width='7' stroke-dasharray='10%2c 1' stroke-dashoffset='0' stroke-linecap='butt'/%3e%3c/svg%3e")`,
+        backgroundImage: `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23FFF' stroke-width='7' stroke-dasharray='10%2c 1' stroke-dashoffset='0' stroke-linecap='butt'/%3e%3c/svg%3e")`,
       }}
       size="xs"
     >

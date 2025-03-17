@@ -23,7 +23,7 @@ const MoviesList = () => {
 
   /// m ***************************************************
   return (
-    <div className="h-full overflow-y-auto w-96">
+    <div className="h-full overflow-y-auto w-96 shrink-0">
       {movieList.map((movie, k) => (
         <div
           color={"blue.500"}

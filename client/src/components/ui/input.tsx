@@ -20,13 +20,16 @@ export const Input = (props: IInputProps) => {
     <div
       className={cn([
         "flex flex-col",
-        "!border-4 !border-pink-500 !rounded-md !translate-z-96",
+        // "!border-4 !border-pink-500 !rounded-md !translate-z-96",
         props.classeNames?.base,
       ])}
+      style={{
+        backgroundImage: `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%238103ff' stroke-width='15' stroke-dasharray='8%2c 1' stroke-dashoffset='0' stroke-linecap='butt'/%3e%3c/svg%3e")`,
+      }}
     >
       <div
         className={cn([
-          "!text-[1rem] !text-pink-500 !p-1 !px-3",
+          "!text-[1rem] !text-[#8103ff] !p-1 !px-3",
           props.classeNames?.label,
         ])}
       >
@@ -42,7 +45,7 @@ export const Input = (props: IInputProps) => {
         <input
           {...props.InputProps}
           className={cn([
-            "!text-[1.5rem] h-8 outline-0",
+            "!text-[1.5rem] h-8 outline-0 w-full",
             props.classeNames?.input,
           ])}
           value={props.value}
