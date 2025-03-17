@@ -15,6 +15,7 @@ import { Box } from "@chakra-ui/react";
 import { useNavigate } from "react-router";
 import LayoutDesign from "./Layout.Design";
 import LayoutMonitor from "./Layout.Monitor";
+import getRandomNumber from "@/utils/getRandoNumber";
 
 gsap.registerPlugin(useGSAP);
 
@@ -24,6 +25,51 @@ const Layout = ({ children }: { children: ReactNode }) => {
   const uiStatus = useAppSelector((state) => state.ui.status);
   const navigate = useNavigate();
   useMouseEvents();
+
+  /// ? ***************************************************
+  useGSAP(() => {
+    function skewY() {
+      const tl = gsap.timeline();
+      tl.to("#layout-wrapper", {
+        skewType: "simple",
+        skewY: 10,
+        duration: 0.001,
+      });
+      tl.to(
+        "#layout-wrapper",
+        { skewX: 0, skewY: 0, duration: 0.001 },
+        "+=0.1"
+      );
+    }
+    function skewX() {
+      const tl = gsap.timeline();
+      tl.to("#layout-wrapper", {
+        skewType: "simple",
+        skewX: 30,
+        duration: 0.001,
+      });
+      tl.to(
+        "#layout-wrapper",
+        { skewX: 0, skewY: 0, duration: 0.001 },
+        "+=0.1"
+      );
+    }
+
+    function skew() {
+      const ms = getRandomNumber(2000, 5000);
+
+      const skewAnimation = getRandomNumber(0, 1) > 0.5 ? skewX : skewY;
+
+      setTimeout(() => {
+        skewAnimation();
+        setTimeout(() => {
+          skew();
+        }, ms);
+      }, ms);
+    }
+
+    skew();
+  }, {});
 
   /// ? ***************************************************
   useEffect(() => {
@@ -54,7 +100,8 @@ const Layout = ({ children }: { children: ReactNode }) => {
           <LayoutDesign>
             <LayoutMonitor>
               <Box
-                className="min-h-full relative bg-amber-950"
+                id="layout-wrapper"
+                className="h-full w-full !translate-z-96"
                 bg={
                   uiStatus === "init"
                     ? "gray.800"
@@ -63,9 +110,11 @@ const Layout = ({ children }: { children: ReactNode }) => {
                       : "yellow.500"
                 }
               >
-                {uiStatus === "init" && <Startup />}
-                {uiStatus === "loading" && <LoadingBar />}
-                {uiStatus === "ready" && children}
+                <div className="relative w-full h-full overflow-y-auto !translate-z-96">
+                  {uiStatus === "init" && <Startup />}
+                  {uiStatus === "loading" && <LoadingBar />}
+                  {uiStatus === "ready" && children}
+                </div>
               </Box>
             </LayoutMonitor>
           </LayoutDesign>
