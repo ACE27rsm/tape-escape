@@ -1,19 +1,14 @@
-import React, { useCallback } from "react";
-import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { useCallback } from "react";
+import { useNavigate } from "react-router";
 
 /// * components
 import { Button } from "../ui/button";
 
-/// * actions
-import { UI_STATUS } from "../../store/actions";
-
-/// * hooks
-import { useAppDispatch } from "../../hooks/useRedux";
-
 const Intro = () => {
   /// y ***************************************************
-  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   /// ? ***************************************************
   useGSAP(() => {
@@ -39,7 +34,7 @@ const Intro = () => {
 
   /// + ***************************************************
   const handleStartLogin = useCallback(() => {
-    dispatch(UI_STATUS("login"));
+    navigate("/movies");
   }, []);
 
   /// m ***************************************************
@@ -47,19 +42,19 @@ const Intro = () => {
     <>
       <img
         id="logo"
-        src="/images/glitch-bg_TAPE-ESCAPE_v2.jpg"
+        src="/images/tape-escape.jpg"
         alt="logo"
         className="absolute top-0 left-0 w-full !h-full object-cover"
       />
       <img
         id="broken-logo"
-        src="/images/glitch-bg_TAPE-ESCAPE.jpg"
+        src="/images/tape-escape-glitch.jpg"
         alt="logo"
         className="absolute top-0 left-0 w-full !h-full object-cover opacity-0"
       />
 
       <div className="w-full h-full flex justify-center items-end">
-        <Button onClick={handleStartLogin}>LOGIN</Button>
+        <Button onClick={handleStartLogin}>START</Button>
       </div>
     </>
   );

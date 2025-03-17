@@ -44,6 +44,7 @@ function* errorHandlerSaga() {
 
     if (axios.isAxiosError(error)) {
       const err = error.toJSON();
+      console.log({ err });
       if (error?.status === 401) {
         yield put(USER_LOGOUT());
       } else {

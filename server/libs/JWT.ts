@@ -12,13 +12,13 @@ class JWT {
     return jsonwebtoken.sign(user, config.jwt.secret);
   }
 
-  static verify(jwt: string): Promise<any> {
-    const decoded = jsonwebtoken.verify(jwt, config.jwt.secret);
-    debugger
-    return {
-      _jwt: jwt,
-      ..._.omit(decoded, ["iat", "exp"]),
-    };
+  static verify(jwt: string): IUserWithoutPassword {
+    const decoded = jsonwebtoken.verify(
+      jwt,
+      config.jwt.secret
+    ) as IUserWithoutPassword
+
+    return decoded;
   }
 }
 

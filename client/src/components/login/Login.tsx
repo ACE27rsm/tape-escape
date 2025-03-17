@@ -1,16 +1,17 @@
 /// * utils
-import cn from "../../utils/cn";
 import { FormEvent, useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import cn from "../../utils/cn";
 
 /// * hooks
-import { UI_STATUS, USER_LOGIN } from "../../store/actions";
+import { USER_LOGIN } from "../../store/actions";
 
 /// * hooks
 import { useAppDispatch, useAppSelector } from "../../hooks/useRedux";
 
 /// * components
-import Input from "../ui/input";
 import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 
 const Login = () => {
   /// y ***************************************************
@@ -19,12 +20,13 @@ const Login = () => {
   const [stateUsername, setStateUsername] = useState<string>("");
   const [statePassword, setStatePassword] = useState<string>("");
   const loginError = useAppSelector((state) => state.user.error);
+  const navigate = useNavigate();
 
   /// ? ***************************************************
   useEffect(() => {
     let timeOut = setTimeout(() => {
       if (Date.now() - sateLastAction > 30_000) {
-        dispatch(UI_STATUS("intro"));
+        navigate("/");
       }
     }, 1_000);
 
@@ -37,7 +39,7 @@ const Login = () => {
   const handleLogin = useCallback(
     (e: FormEvent) => {
       e.preventDefault();
-      console.log("AAA", { username: stateUsername, password: statePassword });
+
       dispatch(
         USER_LOGIN({ username: stateUsername, password: statePassword })
       );

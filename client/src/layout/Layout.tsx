@@ -69,9 +69,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
               >
                 {uiStatus === "init" && <Startup />}
                 {uiStatus === "loading" && <LoadingBar />}
-                {uiStatus === "intro" && <Intro />}
-                {uiStatus === "login" && <Login />}
-                {isLoggedIn && children}
+                {uiStatus === "ready" && children}
               </Box>
             </LayoutMonitor>
           </LayoutDesign>

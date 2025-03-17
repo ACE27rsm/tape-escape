@@ -15,7 +15,7 @@ export interface IInputProps {
   value?: string;
 }
 
-const input = (props: IInputProps) => {
+export const Input = (props: IInputProps) => {
   return (
     <div
       className={cn([
@@ -53,5 +53,3 @@ const input = (props: IInputProps) => {
     </div>
   );
 };
-
-export default input;

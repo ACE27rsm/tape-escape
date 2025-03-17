@@ -8,7 +8,7 @@ const LayoutMonitor = ({ children }: { children: ReactNode }) => {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: "url('/images/glitch-bg.jpg')",
+            backgroundImage: "url('/images/monitor-bg.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",

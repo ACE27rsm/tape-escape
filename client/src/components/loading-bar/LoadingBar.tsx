@@ -32,7 +32,7 @@ const LoadingBar = () => {
 
   /// + ***************************************************
   const handleComplete = useCallback(() => {
-    setTimeout(() => dispatch(UI_STATUS("intro")), 1000);
+    setTimeout(() => dispatch(UI_STATUS("ready")), 1000);
   }, []);
 
   /// m ***************************************************
