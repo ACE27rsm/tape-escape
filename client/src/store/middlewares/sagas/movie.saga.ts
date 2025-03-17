@@ -1,5 +1,12 @@
 import { AxiosResponse } from "axios";
-import { call, put, spawn, takeEvery } from "redux-saga/effects";
+import {
+  call,
+  debounce,
+  put,
+  spawn,
+  takeEvery,
+  takeLatest,
+} from "redux-saga/effects";
 
 /// * libs
 import Axios from "../../../libs/Axios";
@@ -14,26 +21,60 @@ import {
   MOVIES_LIST_GET,
   MOVIES_LIST_SET,
   UI_ERROR_HANDLER,
+  MOVIES_LIST_GET_DEBOUNCED,
+  MOVIES_DETAILS_FETCHING,
+  MOVIES_DETAILS_GET,
+  MOVIES_DETAILS_SET,
 } from "../../actions";
 
 /// * types
-import { TMDB } from "../../../../../types/TMDB.types";
+import { TMDB, IMovieListPayload } from "../../../../../types";
 
 const logger = new LoggerClient("movieSaga", { color: "pink" });
 
 /// y *****************************************
 /// y *****************************************
 /// y *****************************************
+function* getMovieDetails() {
+  function* get({ payload: movieId }: { payload: number }) {
+    try {
+      yield put(MOVIES_DETAILS_FETCHING(true));
+      yield put(MOVIES_DETAILS_SET(null));
+
+      const response: AxiosResponse = yield call(
+        Axios.get,
+        `/movies/movie/${movieId}`
+      );
+
+      const data: TMDB.MovieDetails = response.data;
+
+      yield put(MOVIES_DETAILS_SET(data));
+    } catch (error) {
+      logger.debugError(error);
+      yield put(UI_ERROR_HANDLER(error));
+    } finally {
+      yield put(MOVIES_DETAILS_FETCHING(false));
+    }
+  }
+
+  yield takeLatest(MOVIES_DETAILS_GET, get);
+}
+
+/// y *****************************************
+/// y *****************************************
+/// y *****************************************
 function* getMovieList() {
-  function* get() {
+  function* get({ payload }: { payload: IMovieListPayload }) {
     try {
       yield put(MOVIES_LIST_FETCHING(true));
 
-      const response: AxiosResponse = yield call(Axios.get, "/movies");
+      const response: AxiosResponse = yield call(Axios.get, "/movies", {
+        params: payload,
+      });
 
       const data: TMDB.MovieList = response.data;
 
-      yield put(MOVIES_LIST_SET(data));
+      yield put(MOVIES_LIST_SET({ ...data, query: payload.query }));
     } catch (error) {
       logger.debugError(error);
       yield put(UI_ERROR_HANDLER(error));
@@ -42,7 +83,13 @@ function* getMovieList() {
     }
   }
 
-  yield takeEvery(MOVIES_LIST_GET, get);
+  yield takeLatest(MOVIES_LIST_GET, get);
+}
+
+function* getDebouncedMovieList() {
+  yield debounce(1000, MOVIES_LIST_GET_DEBOUNCED, function* ({ payload }) {
+    yield put(MOVIES_LIST_GET(payload));
+  });
 }
 
 /// y *****************************************
@@ -70,6 +117,8 @@ function* getGenres() {
 }
 
 function* movieSaga() {
+  yield spawn(getMovieDetails);
+  yield spawn(getDebouncedMovieList);
   yield spawn(getMovieList);
   yield spawn(getGenres);
 }

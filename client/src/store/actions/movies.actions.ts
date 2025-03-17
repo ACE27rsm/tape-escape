@@ -3,6 +3,9 @@ import { ActionCreatorWithPayload, createAction } from "@reduxjs/toolkit";
 /// * from slice
 import { actions } from "../reducers/movies.reducer";
 
+/// * types
+import { IMovieListPayload } from "../../../../types";
+
 export const {
   MOVIES_GENRES_FETCHING,
   MOVIES_GENRES_SET,
@@ -15,8 +18,11 @@ export const {
 
 export const MOVIES_GENRES_GET = createAction("movies/MOVIES_GENRES_GET");
 
-export const MOVIES_LIST_GET: ActionCreatorWithPayload<{ query: string }> =
+export const MOVIES_LIST_GET: ActionCreatorWithPayload<IMovieListPayload> =
   createAction("movies/MOVIES_LIST_GET");
 
-export const MOVIES_DETAILS_GET: ActionCreatorWithPayload<{ movieId: string }> =
+export const MOVIES_LIST_GET_DEBOUNCED: ActionCreatorWithPayload<IMovieListPayload> =
+  createAction("movies/MOVIES_LIST_GET_DEBOUNCED");
+
+export const MOVIES_DETAILS_GET: ActionCreatorWithPayload<number> =
   createAction("movies/MOVIES_DETAILS_GET");

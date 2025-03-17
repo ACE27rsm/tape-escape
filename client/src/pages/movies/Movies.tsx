@@ -1,46 +1,34 @@
-import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
+/// * hooks
+import { useAppDispatch } from "../../hooks/useRedux";
+
 /// * components
-import { Button } from "../../components/ui/button";
+import MoviesHeader from "./Movies.Header";
+import MoviesList from "./Movies.List";
 
 /// * actions
-import { MOVIES_LIST_GET, MOVIES_GENRES_GET } from "../../store/actions";
-import { MenuContent, MenuItem } from "@/components/ui/menu";
-import { useAppSelector } from "@/hooks/useRedux";
-import cn from "../../utils/cn";
+import { MOVIES_GENRES_GET, MOVIES_LIST_GET } from "../../store/actions";
+import MoviesDetails from "./Movies.Details";
 
 const Movies = () => {
   /// y ***************************************************
-  const dispatch = useDispatch();
-  const movieList = useAppSelector((state) => state.movies.list.moviesList);
+  const dispatch = useAppDispatch();
 
   /// ? ***************************************************
   useEffect(() => {
     dispatch(MOVIES_GENRES_GET());
-    dispatch(MOVIES_LIST_GET({ query: "" }));
+    dispatch(MOVIES_LIST_GET({ query: "", page: 1 }));
   }, []);
 
   /// m ***************************************************
   return (
-    <div className="flex items-stretch h-[calc(100%-144px)]">
-      <div className="h-full overflow-y-auto w-96">
-        {movieList.map((movie, k) => (
-          <div
-            color={"blue.500"}
-            key={movie.id}
-            className={cn(
-              "!p-4 cursor-pointer",
-              k % 2 === 0
-                ? "bg-amber-600 hover:bg-amber-700"
-                : "bg-amber-400 hover:bg-amber-500"
-            )}
-          >
-            {movie.title}
-          </div>
-        ))}
+    <div className="flex flex-col h-[calc(100%-137px)]">
+      <MoviesHeader />
+      <div className="grow flex items-stretch h-[calc(100%-137px)]">
+        <MoviesList />
+        <MoviesDetails />
       </div>
-      <div className="grow bg-amber-700"></div>
     </div>
   );
 };

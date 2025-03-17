@@ -6,7 +6,7 @@ import httpStatus from "http-status";
 import TMDB_API from "@/libs/TMDB_API";
 
 /// * types
-import { IRequestWithAuth } from "../../types";
+import { IRequestWithAuth, TMDB } from "../../types";
 
 class MoviesController {
   /// o ********************************
@@ -16,16 +16,21 @@ class MoviesController {
     next: NextFunction
   ) {
     try {
-      const query = req.body.query;
-      const page = req.body.page || 1;
+      const query = req.query.query ? String(req.query.query) : "";
+      const page = req.query.page ? Number(req.query.page) : 1;
 
-      const movieList = await TMDB_API.getMovieList(page);
-
-      res.send(movieList);
+      if (query) {
+        const movieList = await TMDB_API.searchMovieByName(query, page);
+        res.send(movieList);
+      } else {
+        const movieList = await TMDB_API.getMovieList(page);
+        res.send(movieList);
+      }
     } catch (error) {
       next(error);
     }
   }
+
   /// o ********************************
   static async getGenres(
     req: IRequestWithAuth,
@@ -35,6 +40,25 @@ class MoviesController {
     try {
       const genres = await TMDB_API.getGenres();
       res.send(genres);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  /// o ********************************
+  static async getMovieDetails(
+    req: IRequestWithAuth,
+    res: express.Response,
+    next: NextFunction
+  ) {
+    try {
+      let movieId = req.params.movieId ? Number(req.params.movieId) : 0;
+      if (!req.params.movieId) {
+        throw new httpErrors.BadRequest("movieId is required");
+      }
+
+      const movie = await TMDB_API.getMovieDetails(movieId);
+      res.send(movie);
     } catch (error) {
       next(error);
     }

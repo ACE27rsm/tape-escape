@@ -1,7 +1,11 @@
-import type { ButtonProps as ChakraButtonProps } from "@chakra-ui/react";
+import type {
+  ButtonProps as ChakraButtonProps,
+  IconButtonProps as ChakraIconButtonProps,
+} from "@chakra-ui/react";
 import {
   AbsoluteCenter,
   Button as ChakraButton,
+  IconButton as ChakraIconButton,
   Span,
   Spinner,
 } from "@chakra-ui/react";
@@ -46,3 +50,24 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     );
   }
 );
+
+export const IconButton = React.forwardRef<
+  HTMLButtonElement,
+  ChakraIconButtonProps
+>(function IconButton(props, ref) {
+  const { loading, disabled, loadingText, children, ...rest } = props;
+  return (
+    <ChakraIconButton
+      className="!translate-z-96 !bg-red-500 hover:!bg-yellow-500"
+      disabled={loading || disabled}
+      ref={ref}
+      {...rest}
+      style={{
+        backgroundImage: `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23EC3463' stroke-width='7' stroke-dasharray='10%2c 1' stroke-dashoffset='0' stroke-linecap='butt'/%3e%3c/svg%3e")`,
+      }}
+      size="xs"
+    >
+      {children}
+    </ChakraIconButton>
+  );
+});

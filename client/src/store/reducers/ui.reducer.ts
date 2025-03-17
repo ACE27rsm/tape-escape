@@ -8,7 +8,7 @@ export interface IUIState {
 }
 
 const init = (): IUIState => ({
-  status: "init",
+  status: "ready",
   blueScreen: false,
 });
 

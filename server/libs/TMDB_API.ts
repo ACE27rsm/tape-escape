@@ -102,11 +102,14 @@ class TMDB_API {
   }
 
   /// o ********************************
-  static async serchMovieByName(query: string): Promise<TMDB.MovieList> {
+  static async searchMovieByName(
+    query: string,
+    page: number = 1
+  ): Promise<TMDB.MovieList> {
     try {
       const response = await this.request.get(`/3/search/movie`, {
         params: {
-          page: 1,
+          page,
           include_adult: false,
           language: "en-US",
           query,

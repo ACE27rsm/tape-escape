@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { TMDB } from "../../../../types/TMDB.types";
+import { TMDB, IMovieListResult } from "../../../../types";
 
 export interface IUIState {
   genres: {
@@ -53,10 +53,11 @@ const slice = createSlice({
       movies.list.fetching = payload;
     },
 
-    MOVIES_LIST_SET: (movies, { payload }: { payload: TMDB.MovieList }) => {
+    MOVIES_LIST_SET: (movies, { payload }: { payload: IMovieListResult }) => {
       movies.list.moviesList = payload.results;
       movies.list.totalPages = payload.total_pages;
       movies.list.page = payload.page;
+      movies.list.query = payload.query;
     },
 
     MOVIES_DETAILS_FETCHING: (movies, { payload }: { payload: boolean }) => {

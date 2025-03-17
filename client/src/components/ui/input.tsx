@@ -20,13 +20,13 @@ export const Input = (props: IInputProps) => {
     <div
       className={cn([
         "flex flex-col",
-        "!border-4 !border-[#ff00ea] !rounded-md !translate-z-96",
+        "!border-4 !border-pink-500 !rounded-md !translate-z-96",
         props.classeNames?.base,
       ])}
     >
       <div
         className={cn([
-          "!text-[1rem] !text-[#ff00ea] !p-1 !px-3",
+          "!text-[1rem] !text-pink-500 !p-1 !px-3",
           props.classeNames?.label,
         ])}
       >
