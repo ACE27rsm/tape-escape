@@ -1,19 +1,24 @@
 import express from "express";
 
 /// * routes
-import testRotue from "./test.route";
 import authRoute from "./auth.route";
+import moviesRoute from "./movies.route";
+import testRotue from "./test.route";
 
 const router = express.Router();
 
 const appRoutes = [
   {
-    path: "/test",
-    route: testRotue,
-  },
-  {
     path: "/auth",
     route: authRoute,
+  },
+  {
+    path: "/movies",
+    route: moviesRoute,
+  },
+  {
+    path: "/test",
+    route: testRotue,
   },
 ];
 

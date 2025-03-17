@@ -5,19 +5,16 @@ import { ReactNode, useEffect, useRef } from "react";
 /// * hooks
 import { useAppSelector } from "../hooks/useRedux";
 
-import Login from "@/components/login/Login";
-
 /// * hooks
 import useMouseEvents from "../hooks/useMouseEvents";
 
 /// * components
 import LoadingBar from "@/components/loading-bar/LoadingBar";
 import Startup from "@/components/startup/Startup";
-import Intro from "../components/intro/Intro";
-import LayoutDesign from "./Layout.Design";
-import LayoutMonitor from "./Layout.Monitor";
 import { Box } from "@chakra-ui/react";
 import { useNavigate } from "react-router";
+import LayoutDesign from "./Layout.Design";
+import LayoutMonitor from "./Layout.Monitor";
 
 gsap.registerPlugin(useGSAP);
 
@@ -26,7 +23,6 @@ const Layout = ({ children }: { children: ReactNode }) => {
   const container = useRef<HTMLElement>(null);
   const uiStatus = useAppSelector((state) => state.ui.status);
   const navigate = useNavigate();
-  const isLoggedIn = useAppSelector((state) => !!state.user.username);
   useMouseEvents();
 
   /// ? ***************************************************
@@ -58,7 +54,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
           <LayoutDesign>
             <LayoutMonitor>
               <Box
-                className="overflow-y-auto h-full !p-10 relative"
+                className="min-h-full relative bg-amber-950"
                 bg={
                   uiStatus === "init"
                     ? "gray.800"

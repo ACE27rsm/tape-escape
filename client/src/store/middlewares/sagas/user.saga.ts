@@ -56,6 +56,7 @@ function* logInSaga(payload: IUserLoginPayload) {
     const isCancelled: boolean = yield cancelled();
     if (!isCancelled) {
       yield put(USER_LOGIN_TASKS(response.data));
+      yield put(push("/movies"));
     }
   } catch (error: any) {
     logger.debugError("LOGIN ERROR:", error);
@@ -79,7 +80,6 @@ function* logInTaskSaga() {
   function* runTasks({ payload: user }: { payload: IUserWithoutPassword }) {
     yield put(UI_SOCKET_START());
     yield put(USER_SET(user));
-    yield put(push("/movies"));
   }
 
   yield takeLatest(USER_LOGIN_TASKS, runTasks);

@@ -1,16 +1,20 @@
 import { Routes, Route } from "react-router";
 
-import Home from "../pages/home/Home";
+import Movies from "../pages/movies/Movies";
 import AboutUs from "../pages/about-us/AboutUs";
 
 const Router = () => {
   return (
-    <Routes>
-      <Route path="/">
-        <Route path="movies" element={<Home />} />
-        <Route path="about-us" element={<AboutUs />} />
-      </Route>
-    </Routes>
+    <div className="">
+      <div className="h-16 bg-amber-900"> </div>
+      <Routes>
+        <Route path="/">
+          <Route path="movies" element={<Movies />} />
+          <Route path="about-us" element={<AboutUs />} />
+        </Route>
+      </Routes>
+      <div className="h-16 bg-amber-900"></div>
+    </div>
   );
 };
 

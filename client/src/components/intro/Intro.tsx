@@ -53,7 +53,7 @@ const Intro = () => {
         className="absolute top-0 left-0 w-full !h-full object-cover opacity-0"
       />
 
-      <div className="w-full h-full flex justify-center items-end">
+      <div className="absolute top-0 left-0 w-full h-full flex justify-center items-end !pb-8">
         <Button onClick={handleStartLogin}>START</Button>
       </div>
     </>

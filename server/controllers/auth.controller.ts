@@ -66,7 +66,7 @@ class AuthController {
         sameSite: config.isProduction ? "lax" : undefined,
       });
 
-      res.end();
+      res.send(req.user);
     } catch (error) {
       next(error);
     }
