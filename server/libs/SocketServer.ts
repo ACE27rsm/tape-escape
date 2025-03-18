@@ -31,12 +31,15 @@ class SocketServer {
 
     logger.log({ message: "Inizializzazione server di Socket.io" });
 
+    const url = new URL(config.server.url);
+    console.log(url);
+
     this.#instance = new io.Server(httpServer, {
       cors: {
-        origin: config.isProduction ? config.server.origin : true,
+        origin: config.isProduction ? url.origin : true,
         credentials: true,
       },
-      path: config.server.origin + "/socket.io",
+      path: url.pathname.replace(/\/$/, "") + "/socket.io",
     });
 
     this.#instance.on("connection", async (clientSocket: Socket) => {

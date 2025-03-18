@@ -13,6 +13,7 @@ export interface IConfig {
     origin: string;
     port: number;
     url: string;
+    ws: string;
   };
   logger: {
     debugConsole: boolean;
@@ -36,6 +37,7 @@ const isProduction = process.env.NODE_ENV === "production";
 const serverPort = Number(process.env.SERVER_PORT || 27027);
 const serverOrigin = process.env.SERVER_ORIGIN || `http://localhost`;
 const serverURL = serverOrigin + (isProduction ? "" : `:${serverPort}`);
+const ws = serverURL + "/socket.io";
 
 const config: IConfig = {
   isProduction,
@@ -43,6 +45,7 @@ const config: IConfig = {
     port: serverPort,
     origin: serverOrigin,
     url: serverURL,
+    ws,
   },
   logger: {
     debugConsole: castStringToBoolean(process.env.DEBUG_CONSOLE),

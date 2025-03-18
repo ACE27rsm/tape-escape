@@ -34,6 +34,8 @@ function createSocketChannel(serviceWebSocket: Socket) {
 
       /// + on connect *******************************************************************
       serviceWebSocket.on("connect", () => {
+        console.log("socket ID", serviceWebSocket.id);
+
         _socket.id = serviceWebSocket.id!;
       });
 
@@ -88,13 +90,19 @@ export default function* socketIO() {
   while (true) {
     yield take(UI_SOCKET_START.type);
 
-    const url = config.apiURL;
+    const url = new URL(config.apiURL);
 
-    const socket: Socket = yield call(io, url, {
+    console.log("SOCKET URL", url);
+
+    const pathToApp = url.pathname.replace(/\/$/, "");
+
+    const socket: Socket = yield call(io, url.origin, {
       forceNew: true,
-      path: `${url}/socket.io/`,
+      path: `${pathToApp}/socket.io`,
       withCredentials: true,
     });
+
+    console.log("SOCKET", socket);
 
     yield apply(socket, socket.connect, []);
 
