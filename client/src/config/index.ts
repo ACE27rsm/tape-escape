@@ -4,9 +4,13 @@ interface IConfig {
   logger: { debugConsole: boolean };
 }
 
+const isProduction = import.meta.env.VITE_ENV === "production";
+
 const config: IConfig = {
-  isProduction: false,
-  apiURL: "http://localhost:27027",
+  isProduction,
+  apiURL: isProduction
+    ? import.meta.env.VITE_SERVER_ORIGIN!
+    : "http://localhost:27027/api",
   logger: {
     debugConsole: true,
   },

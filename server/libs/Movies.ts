@@ -18,12 +18,14 @@ class Movies {
   static rentedMovies: MovieTypes.RentedMovie[] = [];
   static rentedMoviesFilePath = path.join(
     process.cwd(),
-    "db/rented-movies.db.txt"
+    "db",
+    "rented-movies.db.txt"
   );
   static rentedMoviesHistory: MovieTypes.RentedMovieHistory[] = [];
   static rentedMoviesHistoryFilePath = path.join(
     process.cwd(),
-    "db/rented-movies-history.db.txt"
+    "db",
+    "rented-movies-history.db.txt"
   );
   static currentRentId = 0;
 
@@ -195,7 +197,7 @@ class Movies {
 
       this.updateDBFiles();
 
-      SocketServer.broadcast("movieRented", { movieId });
+      SocketServer.broadcast("movieRented", { movieId, userId });
     } catch (error) {
       return this.errorHandler("rentMovie", error);
     }
@@ -236,7 +238,7 @@ class Movies {
 
       this.updateDBFiles();
 
-      SocketServer.broadcast("movieReturned", { movieId });
+      SocketServer.broadcast("movieReturned", { movieId, userId });
     } catch (error) {
       return this.errorHandler("returnMovie", error);
     }

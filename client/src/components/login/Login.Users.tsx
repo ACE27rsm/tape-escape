@@ -77,7 +77,7 @@ const LoginUsers = ({ onSelect }: { onSelect: (user: IUser) => void }) => {
               <DialogTitle>NEED HELP TO LOGING??</DialogTitle>
             </DialogHeader>
             <DialogBody>
-              <p>
+              <p className="!text-xl">
                 Log In as a test user to rent a movie. <br /> You will be able
                 to rent a movie for free.
               </p>

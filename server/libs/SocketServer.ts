@@ -32,7 +32,6 @@ class SocketServer {
     logger.log({ message: "Inizializzazione server di Socket.io" });
 
     const url = new URL(config.server.url);
-    console.log(url);
 
     this.#instance = new io.Server(httpServer, {
       cors: {

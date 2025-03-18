@@ -27,6 +27,9 @@ const MoviesList = () => {
   /// m ***************************************************
   return (
     <div className="h-full overflow-y-auto w-96 shrink-0">
+      {movieList.length === 0 && (
+        <div className="!p-4 !text-xl !text-center">No movies found</div>
+      )}
       {movieList.map((movie, k) => {
         const isSelected = movieSelected?.id === movie.id;
 

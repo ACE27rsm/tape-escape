@@ -8,7 +8,7 @@ import { IUser } from "../../types/User.types";
 
 async function run() {
   try {
-    const filePath = path.join(process.cwd(), "..", "db/users.db.txt");
+    const filePath = path.join(process.cwd(), "..", "db", "users.db.txt");
 
     const userCollection: IUser[] = JSON.parse(
       await fs.readFile(filePath, "utf-8")

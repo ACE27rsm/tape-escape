@@ -46,7 +46,7 @@ const Avatar = () => {
             <img
               src={user.avatar}
               alt="avatar"
-              className="object-cover w-16 !h-16 cursor-pointer"
+              className="object-cover w-16 !h-14 cursor-pointer"
             />
           </div>
         </MenuTrigger>

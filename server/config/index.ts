@@ -12,7 +12,7 @@ export interface IConfig {
   server: {
     origin: string;
     port: number;
-    url: string;
+    url: URL;
     ws: string;
   };
   logger: {
@@ -36,7 +36,8 @@ export interface IConfig {
 const isProduction = process.env.NODE_ENV === "production";
 const serverPort = Number(process.env.SERVER_PORT || 27027);
 const serverOrigin = process.env.SERVER_ORIGIN || `http://localhost`;
-const serverURL = serverOrigin + (isProduction ? "" : `:${serverPort}`);
+const serverURL =
+  serverOrigin + (isProduction ? "" : `:${serverPort}`) + "/api";
 const ws = serverURL + "/socket.io";
 
 const config: IConfig = {
@@ -44,7 +45,7 @@ const config: IConfig = {
   server: {
     port: serverPort,
     origin: serverOrigin,
-    url: serverURL,
+    url: new URL(serverURL),
     ws,
   },
   logger: {

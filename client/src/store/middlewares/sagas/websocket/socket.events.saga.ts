@@ -25,11 +25,12 @@ export default function* socketEvents(
     /// = l MOVIES -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
     case "movieRented":
       const store: RootState = yield select();
+
       yield put(
         MOVIES_RENTED_TOGGLE({
           movieId: data.movieId,
           rented: true,
-          rentedByThisUser: store.user.username === data.username,
+          rentedByThisUser: store.user.username === data.userId,
         })
       );
       logger.debug(data);

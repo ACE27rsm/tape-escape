@@ -48,7 +48,7 @@ app.use(
      * viene riflessa l'origine del client, di fatto permettendo a tutti di chiamare il server.
      * https://expressjs.com/en/resources/middleware/cors.html#configuration-options
      */
-    origin: config.isProduction ? config.server.origin : true,
+    origin: config.isProduction ? config.server.url.origin : true,
     credentials: true,
     exposedHeaders: ["Content-Disposition"],
   })
@@ -58,7 +58,7 @@ app.use(
 app.use(cookieParser());
 
 // gestione routers
-app.use(routes);
+app.use(config.server.url.pathname.replace(/\/$/, ""), routes);
 
 // infine, gestione errori
 //@ts-ignore

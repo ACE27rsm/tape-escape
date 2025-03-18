@@ -10,10 +10,11 @@ const logger = new Logger("user");
 class User {
   private static usersWithCredentials: IUser[] = [];
   static users: User[] = [];
-  static userFilePath = path.join(process.cwd(), "db/users.db.txt");
+  static userFilePath = path.join(process.cwd(), "db", "users.db.txt");
   static userWithCredentialFilePath = path.join(
     process.cwd(),
-    "db/users-with-credentials.db.tsx"
+    "db",
+    "users-with-credentials.db.tsx"
   );
 
   /// o ***************************************************

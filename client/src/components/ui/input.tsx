@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import cn, { TCnProps } from "../../utils/cn";
 
-export interface IInputProps {
+export interface IInputProps extends React.ComponentProps<"input"> {
   classeNames?: {
     base?: TCnProps;
     inputWrapper?: TCnProps;

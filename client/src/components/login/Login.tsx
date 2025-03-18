@@ -95,6 +95,7 @@ const Login = () => {
             inputWrapper: ["h-14"],
             label: ["!text-2xl"],
           }}
+          autoComplete="username"
           value={stateUsername}
           onChange={(e) => handleChange("username", e.target.value)}
         />
@@ -107,6 +108,7 @@ const Login = () => {
             inputWrapper: ["h-14"],
             label: ["!text-2xl"],
           }}
+          autoComplete="password"
           value={statePassword}
           onChange={(e) => handleChange("password", e.target.value)}
         />

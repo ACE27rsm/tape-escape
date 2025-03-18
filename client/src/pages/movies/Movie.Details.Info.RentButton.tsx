@@ -106,7 +106,7 @@ const MovieDetailsInfoRentButton = ({
           </DialogRoot>
         </div>
       )}
-      {movieSelected.rented && !movieSelected.rentedByThisUser && (
+      {movieSelected.rented && movieSelected.rentedByThisUser && (
         <div className="flex justify-between gap-4 !py-2 items-center">
           <div className="!text-2xl !text-red-600">You rented this movie</div>
 
@@ -153,7 +153,7 @@ const MovieDetailsInfoRentButton = ({
           </DialogRoot>
         </div>
       )}
-      {movieSelected.rented && movieSelected.rentedByThisUser && (
+      {movieSelected.rented && !movieSelected.rentedByThisUser && (
         <div className="flex justify-center gap-4 !py-2 items-center !bg-red-500 !rounded-lg !p-4">
           <motion.div
             className="!text-5xl"

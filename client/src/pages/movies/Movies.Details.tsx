@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/useRedux";
 
 /// * actions
-import { MOVIES_DETAILS_GET } from "../../store/actions";
+import { MOVIES_DETAILS_GET, MOVIES_DETAILS_SET } from "../../store/actions";
 
 /// * components
 import LottieAnimation from "../../components/lottie-animation/LottieAnimation";
@@ -24,8 +24,8 @@ const MoviesDetails = () => {
 
   /// ? ***************************************************
   useEffect(() => {
-    console.log("AAAA");
     if (movieList.length) dispatch(MOVIES_DETAILS_GET(movieList[0].id));
+    else dispatch(MOVIES_DETAILS_SET(null));
   }, [page]);
 
   /// m ***************************************************
@@ -41,7 +41,10 @@ const MoviesDetails = () => {
         <MovieDetailsInfo movieSelected={movieSelected} />
       ) : (
         <div className="flex justify-center items-center w-full h-full">
-          <div className="w-64">SELECT A MOVIE</div>
+          <div className="w-64 text-center !text-4xl !text-red-500">
+            ERROR <br />
+            NO MOVIE SELECTED
+          </div>
         </div>
       )}
     </div>
