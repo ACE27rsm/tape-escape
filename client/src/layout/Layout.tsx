@@ -108,7 +108,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
                     ? "gray.800"
                     : uiStatus === "loading"
                       ? "gray.500"
-                      : "yellow.500"
+                      : "linear-gradient(90deg, rgba(129,3,255,1) 0%, rgba(255,239,0,1) 100%)"
                 }
               >
                 <div className="relative w-full h-full overflow-y-auto !translate-z-96">

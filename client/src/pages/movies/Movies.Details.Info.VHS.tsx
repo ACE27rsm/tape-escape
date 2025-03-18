@@ -6,11 +6,11 @@ const MoviesDetailsVHS = ({ poster_path }: { poster_path: string | null }) => {
   }
 
   return (
-    <div className="w-64 h-96  shrink-0 !p-5 relative">
+    <div className="w-64 h-96  shrink-0 !p-5 relative xl:translate-x-[-30px]">
       <img
         src={poster_path}
         alt="poster"
-        className="w-64 !h-[319px] !border-solid !bg-gray-600 !border-r-4"
+        className="w-64 !h-[319px] !border-solid !bg-gray-500 !border-r-4"
         style={{
           transform:
             "perspective(1000px) rotateY(-30deg) rotateX(0deg) translateX(0px) translateY(0px)",
@@ -19,7 +19,7 @@ const MoviesDetailsVHS = ({ poster_path }: { poster_path: string | null }) => {
       />
 
       <div
-        className="absolute w-2 h-[330px] top-[14px] right-[6px] bg-gray-500"
+        className="absolute w-2 h-[330px] top-[14px] right-[-10px] bg-gray-700"
         style={{
           transform:
             "perspective(1000px) rotateY(-30deg) rotateX(0deg) translateX(0px) translateY(0px)",
@@ -27,7 +27,7 @@ const MoviesDetailsVHS = ({ poster_path }: { poster_path: string | null }) => {
         }}
       />
       <div
-        className="absolute w-6 h-[330px] top-[14px] right-2 bg-gray-600"
+        className="absolute w-10 h-[330px] top-[14px] right-[-8px] bg-gray-600"
         style={{
           transform:
             "perspective(1000px) rotateY(30deg) rotateX(0deg) translateX(0px) translateY(0px)",

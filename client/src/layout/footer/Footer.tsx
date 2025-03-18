@@ -3,7 +3,7 @@ import { PiCowBold } from "react-icons/pi";
 
 const Footer = () => {
   return (
-    <div className="h-max !p-2 !px-6 flex justify-between items-center !text-[#8103ff] !text-sm !font-semibold ">
+    <div className="h-max !p-2 !px-6 flex justify-between items-center !text-sm !font-semibold">
       <div>
         <div className="flex items-center gap-2">
           Author: Daniele Salvatori{" "}
@@ -26,7 +26,7 @@ const Footer = () => {
           </a>
         </div>
       </div>
-      <div>Powerd by TMDB</div>
+      <div className="!text-[#8103ff]">Powerd by TMDB</div>
     </div>
   );
 };
