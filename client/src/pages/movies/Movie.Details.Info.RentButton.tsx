@@ -108,7 +108,7 @@ const MovieDetailsInfoRentButton = ({
       )}
       {movieSelected.rented && movieSelected.rentedByThisUser && (
         <div className="flex justify-between gap-4 !py-2 items-center">
-          <div className="!text-2xl !text-red-400">You rented this movie</div>
+          <div className="!text-2xl !text-red-600">You rented this movie</div>
 
           <DialogRoot placement="center" open={stateReturnModalOpen}>
             <DialogTrigger asChild>
@@ -151,6 +151,20 @@ const MovieDetailsInfoRentButton = ({
               </DialogContent>
             </DialogPositioner>
           </DialogRoot>
+        </div>
+      )}
+      {movieSelected.rented && !movieSelected.rentedByThisUser && (
+        <div className="flex justify-center gap-4 !py-2 items-center !bg-red-500 !rounded-lg !p-4">
+          <motion.div
+            className="!text-5xl"
+            animate={{
+              scale: [1, 1.1, 1],
+              color: ["#ff0000", "#00ff00", "#0000ff"],
+            }}
+            transition={{ duration: 1, repeat: Infinity }}
+          >
+            OUT OF STOCK :(
+          </motion.div>
         </div>
       )}
     </>

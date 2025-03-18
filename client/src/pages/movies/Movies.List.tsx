@@ -34,7 +34,7 @@ const MoviesList = () => {
           <div
             key={movie.id}
             className={cn(
-              "!p-4 cursor-pointer",
+              "!p-4 cursor-pointer relative overflow-hidden",
               k % 2 === 0
                 ? "bg-amber-600 hover:bg-amber-700"
                 : "bg-amber-400 hover:bg-amber-500",
@@ -42,7 +42,13 @@ const MoviesList = () => {
             )}
             onClick={() => handelSelect(movie.id)}
           >
-            <div className="!text-xl truncate">{movie.title}</div>
+            <div className="!text-xl truncate">{movie.title} </div>
+
+            {movie.rented && (
+              <div className="!text-sm bg-red-500 absolute right-[-130px] bottom-[-50px] w-64 h-24 text-center rotate-[-45deg]">
+                Rented
+              </div>
+            )}
           </div>
         );
       })}
