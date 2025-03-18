@@ -1,9 +1,10 @@
-import Footer from "@/layout/footer/Footer";
-import NavBar from "@/layout/nav-bar/NavBar";
-import React from "react";
 import { FaChevronLeft, FaGithub } from "react-icons/fa";
 import { PiCowBold } from "react-icons/pi";
 import { Link } from "react-router";
+
+/// * components
+import Footer from "@/layout/footer/Footer";
+import NavBar from "@/layout/nav-bar/NavBar";
 
 const Credits = () => {
   return (

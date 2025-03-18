@@ -1,6 +1,5 @@
 "use client";
-
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { LottiePlayer } from "lottie-web";
 
 const Animation_Fireworks = ({
@@ -27,7 +26,7 @@ const Animation_Fireworks = ({
         container: ref.current,
         renderer: "svg",
         loop,
-        autoplay: true,
+        autoplay,
 
         // path to your animation file, place it inside public folder
         path: animationPath,

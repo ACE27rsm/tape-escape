@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from "axios";
+import { push } from "redux-first-history";
 import {
   all,
   call,
@@ -11,14 +12,12 @@ import {
   takeEvery,
   takeLatest,
 } from "redux-saga/effects";
-import { push } from "redux-first-history";
 
 /// * libs
 import Axios from "../../../libs/Axios";
 
 /// * actions
 import {
-  UI_ERROR_HANDLER,
   UI_SOCKET_START,
   UI_SOCKET_STOP,
   USER_ERROR,
@@ -27,7 +26,7 @@ import {
   USER_LOGIN_TASKS,
   USER_LOGOUT,
   USER_RESET,
-  USER_SET,
+  USER_SET
 } from "../../actions";
 
 /// * libs

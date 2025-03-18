@@ -25,17 +25,17 @@ const Login = () => {
   const navigate = useNavigate();
 
   /// ? ***************************************************
-  // useEffect(() => {
-  //   let interval = setInterval(() => {
-  //     if (Date.now() - sateLastAction > 10_000) {
-  //       navigate("/");
-  //     }
-  //   }, 1_000);
+  useEffect(() => {
+    let interval = setInterval(() => {
+      if (Date.now() - sateLastAction > 10_000) {
+        navigate("/");
+      }
+    }, 1_000);
 
-  //   return () => {
-  //     clearInterval(interval);
-  //   };
-  // }, [sateLastAction]);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [sateLastAction]);
 
   /// + ***************************************************
   const handleLogin = useCallback(

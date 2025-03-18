@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import { ReactNode, useState } from "react";
 
 export const Popover = ({ children }: { children: ReactNode }) => {
   const [stateOpen, setStateOpen] = useState(false);

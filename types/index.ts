@@ -1,7 +1,6 @@
 import express from "express";
 
 import { IUserWithoutPassword } from "./User.types";
-import { TMDB } from "./TMDB.types";
 import { Movies } from "./Movies.types";
 
 export * from "./User.types";

@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { DialogContent, DialogPositioner, DialogRoot } from "@chakra-ui/react";
+import { useCallback, useMemo, useState } from "react";
 import { CloseButton } from "../ui/close-button";
 
 /// * hooks
@@ -7,20 +7,23 @@ import useFetch from "../../hooks/useFetch";
 
 /// * utils
 import getRandoNumber from "../../utils/getRandoNumber";
+
+/// * types
+import { IUser } from "../../../../types";
+
+/// * components
+import { Button } from "../ui/button";
 import {
   DialogBody,
   DialogCloseTrigger,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "../ui/dialog";
-import { Button } from "../ui/button";
-import { IUser } from "../../../../types";
 
 const LoginUsers = ({ onSelect }: { onSelect: (user: IUser) => void }) => {
   /// ? ***************************************************
-  const { data, error, loading } = useFetch("/user/test-users");
+  const { data } = useFetch("/user/test-users");
   const [stateUserModalOpen, setStateUserModalOpen] = useState(false);
 
   /// + ***************************************************

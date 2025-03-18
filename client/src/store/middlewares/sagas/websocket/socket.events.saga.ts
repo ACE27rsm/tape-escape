@@ -12,6 +12,7 @@ const logger = new LoggerClient("socketEvent", { color: "green" });
 
 /// = ? 4) SEPARATAMENTE GESTISCO GLI EVENTI CHE DEVE GESTIRE LA WS
 export default function* socketEvents(
+  //@ts-ignore
   socket: Socket,
   { type, data }: { type: string; data: any }
 ) {

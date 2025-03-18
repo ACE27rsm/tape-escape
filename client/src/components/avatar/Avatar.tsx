@@ -17,11 +17,6 @@ const Avatar = () => {
   const dispatch = useAppDispatch();
 
   /// + ***************************************************
-  const handleNavigate = useCallback((path: string) => {
-    dispatch(USER_LOGOUT());
-  }, []);
-
-  /// + ***************************************************
   const handleLogOut = useCallback(() => {
     dispatch(USER_LOGOUT());
   }, []);

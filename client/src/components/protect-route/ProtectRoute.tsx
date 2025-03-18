@@ -9,7 +9,7 @@ import Router from "../../router/Router";
 import useAuth from "../../hooks/useAuth";
 
 /// * actions
-import { UI_ERROR_HANDLER, USER_ERROR } from "../../store/actions";
+import { USER_ERROR } from "../../store/actions";
 
 const ProtectedRoute = ({}) => {
   /// = y State

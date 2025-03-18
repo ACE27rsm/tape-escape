@@ -1,5 +1,3 @@
-import React from "react";
-
 const MoviesDetailsVHS = ({ poster_path }: { poster_path: string | null }) => {
   if (!poster_path) {
     return (
@@ -27,7 +25,7 @@ const MoviesDetailsVHS = ({ poster_path }: { poster_path: string | null }) => {
       <img
         src={poster_path}
         alt="poster"
-        className="w-64 !h-[319px] !border-solid !bg-gray-500 !border-r-4"
+        className="w-64 !h-[319px] !border-solid !bg-gray-500 !border-r-4 !rounded-[10px]"
         style={{
           transform:
             "perspective(1000px) rotateY(-30deg) rotateX(0deg) translateX(0px) translateY(0px)",

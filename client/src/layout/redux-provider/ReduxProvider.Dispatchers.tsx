@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { UI_SOCKET_START, UI_SEND_TEST_REQUEST } from "../../store/actions";
+import { UI_SEND_TEST_REQUEST } from "../../store/actions";
 
 const ReduxProviderDispatchers = () => {
   /// y *****************************************

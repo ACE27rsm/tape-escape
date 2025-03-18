@@ -1,18 +1,18 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 /// * hooks
-import { useAppSelector, useAppDispatch } from "../../hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "../../hooks/useRedux";
 
 /// * compoents
 import { IconButton } from "../../components/ui/button";
 
 /// * actions
+import { Input } from "../../components/ui/input";
 import {
   MOVIES_LIST_GET,
   MOVIES_LIST_GET_DEBOUNCED,
 } from "../../store/actions";
-import { Input } from "../../components/ui/input";
 
 const MoviesHeader = () => {
   /// y ***************************************************

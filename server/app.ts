@@ -3,6 +3,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import httpErrors from "http-errors";
 import axios from "axios";
+import path from "path";
 
 /// * static
 import config from "./config";
@@ -56,6 +57,10 @@ app.use(
 
 // gestione autenticazione (cookie per risorse cacheabili dal browser)
 app.use(cookieParser());
+
+if (config.isProduction) {
+  app.use(express.static(path.join(__dirname, "../client/dist")));
+}
 
 // gestione routers
 app.use(config.server.url.pathname.replace(/\/$/, ""), routes);
