@@ -62,8 +62,12 @@ class TMDB_API {
         results: response.data.results.map((movie: TMDB.Movie) => {
           return {
             ...movie,
-            poster_path: `${this.baseURLPosterPath}${movie.poster_path}`,
-            backdrop_path: `${this.baseURLPosterPath}${movie.backdrop_path}`,
+            poster_path:
+              movie.poster_path &&
+              `${this.baseURLPosterPath}${movie.poster_path}`,
+            backdrop_path:
+              movie.backdrop_path &&
+              `${this.baseURLPosterPath}${movie.backdrop_path}`,
           };
         }),
       };
@@ -88,8 +92,12 @@ class TMDB_API {
       if (response.data) {
         const movie: TMDB.MovieDetails = {
           ...response.data,
-          poster_path: `${this.baseURLPosterPath}${response.data.poster_path}`,
-          backdrop_path: `${this.baseURLPosterPath}${response.data.backdrop_path}`,
+          poster_path:
+            response.data.poster_path &&
+            `${this.baseURLPosterPath}${response.data.poster_path}`,
+          backdrop_path:
+            response.data.backdrop_path &&
+            `${this.baseURLPosterPath}${response.data.backdrop_path}`,
         };
 
         return movie;

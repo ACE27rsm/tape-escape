@@ -61,14 +61,16 @@ function* logInSaga(payload: IUserLoginPayload) {
   } catch (error: any) {
     logger.debugError("LOGIN ERROR:", error);
 
-    if (axios.isAxiosError(error) && error?.response?.status === 401) {
+    if (axios.isAxiosError(error)) {
       if (error?.response?.status === 401) {
         yield put(
           USER_ERROR("Invalid username or password. Please try again.")
         );
+      } else {
+        yield put(USER_ERROR(error.message));
       }
     } else {
-      yield put(UI_ERROR_HANDLER(error));
+      yield put(USER_ERROR(error.message));
     }
   } finally {
     yield put(USER_FETCHING(false));
@@ -93,7 +95,11 @@ function* logOutSaga() {
     } catch (error) {
       logger.debugError(error);
     } finally {
-      yield all([put(USER_RESET()), put(UI_SOCKET_STOP()), put(push("/login"))]);
+      yield all([
+        put(USER_RESET()),
+        put(UI_SOCKET_STOP()),
+        put(push("/login")),
+      ]);
     }
   }
   yield takeEvery(USER_LOGOUT.type, logOut);

@@ -1,7 +1,9 @@
 import { AxiosResponse } from "axios";
 import {
+  all,
   call,
   debounce,
+  delay,
   put,
   spawn,
   takeEvery,
@@ -41,10 +43,10 @@ function* getMovieDetails() {
       yield put(MOVIES_DETAILS_FETCHING(true));
       yield put(MOVIES_DETAILS_SET(null));
 
-      const response: AxiosResponse = yield call(
-        Axios.get,
-        `/movies/movie/${movieId}`
-      );
+      const [response]: AxiosResponse[] = yield all([
+        call(Axios.get, `/movies/movie/${movieId}`),
+        delay(200),
+      ]);
 
       const data: TMDB.MovieDetails = response.data;
 
@@ -68,9 +70,12 @@ function* getMovieList() {
     try {
       yield put(MOVIES_LIST_FETCHING(true));
 
-      const response: AxiosResponse = yield call(Axios.get, "/movies", {
-        params: payload,
-      });
+      const [response]: AxiosResponse[] = yield all([
+        call(Axios.get, "/movies", {
+          params: payload,
+        }),
+        delay(200),
+      ]);
 
       const data: TMDB.MovieList = response.data;
 

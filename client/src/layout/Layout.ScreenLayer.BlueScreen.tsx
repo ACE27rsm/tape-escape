@@ -5,9 +5,9 @@ import { useAppSelector } from "@/hooks/useRedux";
 
 const LayoutScreenLayerBlueScreen = () => {
   /// y ***************************************************
-  const isBlueScreen = useAppSelector((state) => state.ui.blueScreen);
+  const blueScreenMessage = useAppSelector((state) => state.ui.blueScreen);
 
-  if (!isBlueScreen) return null;
+  if (!blueScreenMessage) return null;
 
   return (
     <div className="w-full h-full relative">
@@ -17,7 +17,7 @@ const LayoutScreenLayerBlueScreen = () => {
           damage to your computer.
           <br />
           <br />
-          UNMOUNTABLE_BOOT_VOLUME
+          <span className="!text-red-500">{blueScreenMessage}</span>
           <br />
           <br />
           If this is the first time you've seen this stop error screen, restart

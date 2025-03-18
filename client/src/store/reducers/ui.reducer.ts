@@ -4,12 +4,12 @@ export type TStatus = "init" | "loading" | "ready";
 
 export interface IUIState {
   status: TStatus;
-  blueScreen: boolean;
+  blueScreen: string;
 }
 
 const init = (): IUIState => ({
-  status: "loading",
-  blueScreen: false,
+  status: "ready",
+  blueScreen: "",
 });
 
 const slice = createSlice({
@@ -20,7 +20,7 @@ const slice = createSlice({
       ui.status = payload;
     },
 
-    UI_BLUE_SCREEN: (ui, { payload }: { payload: boolean }) => {
+    UI_BLUE_SCREEN: (ui, { payload }: { payload: string }) => {
       ui.blueScreen = payload;
     },
   },

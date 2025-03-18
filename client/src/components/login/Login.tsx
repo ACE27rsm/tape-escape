@@ -80,6 +80,8 @@ const Login = () => {
           label="username"
           InputProps={{ placeholder: "insert username..." }}
           classeNames={{
+            base: ["!py-1"],
+            inputWrapper: ["h-14"],
             label: ["!text-2xl"],
           }}
           value={stateUsername}
@@ -90,6 +92,8 @@ const Login = () => {
           label="password"
           InputProps={{ placeholder: "insert password..", type: "password" }}
           classeNames={{
+            base: ["!py-1"],
+            inputWrapper: ["h-14"],
             label: ["!text-2xl"],
           }}
           value={statePassword}

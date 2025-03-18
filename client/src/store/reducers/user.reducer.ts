@@ -40,8 +40,12 @@ const slice = createSlice({
     },
 
     /// o *******************************************************
-    USER_RESET: () => {
-      return init();
+    USER_RESET: (user) => {
+      user.fetching = false;
+      user.username = "";
+      user.firstName = "";
+      user.lastName = "";
+      user.avatar = "";
     },
   },
 });

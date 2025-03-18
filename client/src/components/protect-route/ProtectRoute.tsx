@@ -9,7 +9,7 @@ import Router from "../../router/Router";
 import useAuth from "../../hooks/useAuth";
 
 /// * actions
-import { UI_ERROR_HANDLER } from "../../store/actions";
+import { UI_ERROR_HANDLER, USER_ERROR } from "../../store/actions";
 
 const ProtectedRoute = ({}) => {
   /// = y State
@@ -21,7 +21,7 @@ const ProtectedRoute = ({}) => {
   /// = + Handlers
   /// + ********************************************************
   const handleLogUnauthorized = useCallback((error: any) => {
-    dispatch(UI_ERROR_HANDLER(error));
+    dispatch(USER_ERROR(error.message));
   }, []);
 
   /// = ? Cycle

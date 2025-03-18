@@ -39,7 +39,12 @@ const LayoutDesign = ({ children }: { children: ReactNode }) => {
             "linear-gradient(270deg, rgba(5,0,0,1) 0%, rgba(106,34,112,1) 100%, rgba(193,68,204,1) 100%)",
         }}
       >
-        <div className="relative w-full h-full flex">
+        <div
+          className="relative w-full h-full flex"
+          style={{
+            transformStyle: "inherit",
+          }}
+        >
           <img
             src="images/stickers/stickers-4.svg"
             alt="sticker4"

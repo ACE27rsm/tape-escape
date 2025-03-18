@@ -17,6 +17,55 @@ function useWindowEvents() {
 
   /// ? *****************************************
   useEffect(() => {
+    function myFunction() {
+      let browser = "";
+      if (
+        (navigator.userAgent.indexOf("Opera") ||
+          navigator.userAgent.indexOf("OPR")) != -1
+      ) {
+        browser = "Opera";
+      } else if (navigator.userAgent.indexOf("Edg") != -1) {
+        browser = "Edge";
+      } else if (navigator.userAgent.indexOf("Chrome") != -1) {
+        browser = "Chrome";
+      } else if (navigator.userAgent.indexOf("Safari") != -1) {
+        browser = "Safari";
+      } else if (navigator.userAgent.indexOf("Firefox") != -1) {
+        browser = "Firefox";
+      } else if (
+        navigator.userAgent.indexOf("MSIE") != -1 ||
+        //@ts-ignore
+        !!document.documentMode == true
+      ) {
+        //IF IE > 10
+        browser = "IE";
+      } else {
+        browser = "unknown";
+      }
+
+      logger.debug("Browser", browser);
+
+      if (
+        browser === "IE" ||
+        browser === "Opera" ||
+        browser === "Firefox" ||
+        browser === "unknown"
+      ) {
+        dispatch(
+          UI_BLUE_SCREEN(
+            "THIS WEBSITE IS BEST VIEWED IN CHROME OR SAFARI, PLEASE SWITCH BROWSERS"
+          )
+        );
+      } else {
+        dispatch(UI_BLUE_SCREEN(""));
+      }
+    }
+
+    myFunction();
+  }, []);
+
+  /// ? *****************************************
+  useEffect(() => {
     function handleMouseClick(e: MouseEvent) {
       logger.debug("Mouse clicked", e.target);
     }
@@ -50,9 +99,9 @@ function useWindowEvents() {
       const height = window.innerHeight;
 
       if (width < 1100 || height < 800) {
-        dispatch(UI_BLUE_SCREEN(true));
+        dispatch(UI_BLUE_SCREEN("VIEWPORT TOO SMALL - PLEASE RESIZE WINDOW"));
       } else {
-        dispatch(UI_BLUE_SCREEN(false));
+        dispatch(UI_BLUE_SCREEN(""));
       }
     }
 
