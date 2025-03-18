@@ -14,6 +14,7 @@ export const {
   MOVIES_LIST_FETCHING,
   MOVIES_LIST_SET,
   MOVIES_RESET,
+  MOVIES_RENTED_TOGGLE,
 } = actions;
 
 export const MOVIES_GENRES_GET = createAction("movies/MOVIES_GENRES_GET");
@@ -26,3 +27,10 @@ export const MOVIES_LIST_GET_DEBOUNCED: ActionCreatorWithPayload<IMovieListPaylo
 
 export const MOVIES_DETAILS_GET: ActionCreatorWithPayload<number> =
   createAction("movies/MOVIES_DETAILS_GET");
+
+export const MOVIES_RENT_MOVIE: ActionCreatorWithPayload<number> = createAction(
+  "movies/MOVIES_RENT_MOVIE"
+);
+
+export const MOVIES_RETURN_MOVIE: ActionCreatorWithPayload<number> =
+  createAction("movies/MOVIES_RETURN_MOVIE");

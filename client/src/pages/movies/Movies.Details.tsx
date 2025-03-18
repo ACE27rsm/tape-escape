@@ -14,6 +14,7 @@ const MoviesDetails = () => {
   /// y ***************************************************
   const dispatch = useAppDispatch();
   const movieList = useAppSelector((state) => state.movies.list.moviesList);
+  const page = useAppSelector((state) => state.movies.list.page);
   const fetching = useAppSelector(
     (state) => state.movies.movieDetails.fetching
   );
@@ -23,9 +24,9 @@ const MoviesDetails = () => {
 
   /// ? ***************************************************
   useEffect(() => {
+    console.log("AAAA");
     if (movieList.length) dispatch(MOVIES_DETAILS_GET(movieList[0].id));
-  }, [movieList]);
-  console.log(movieSelected);
+  }, [page]);
 
   /// m ***************************************************
   return (

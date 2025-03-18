@@ -19,7 +19,7 @@ class TMDB_API {
   private static baseURLPosterPath = "https://image.tmdb.org/t/p/original";
 
   /// ! ********************************
-  private static errorHandler(functionName: string, error: any): never {
+  private static errorHandler(functionName: string, error: unknown): never {
     logger.error({ error, functionName });
     throw error;
   }
@@ -136,7 +136,7 @@ class TMDB_API {
       };
 
       return movieList;
-    } catch (error) {
+    } catch (error: unknown) {
       return this.errorHandler("serchMovieByName", error);
     }
   }

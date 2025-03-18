@@ -66,12 +66,15 @@ class SocketServer {
   /// b ******************************************************************************
   /// b ******************************************************************************
   /// b ******************************************************************************
-  static async emitToUser(params: {
-    clientId: string;
-    event: string;
-    data?: any;
-  }) {
-    this.#instance.to([params.clientId]).emit(params.event, params.data);
+  static async emitToUser(clientId: string, event: string, data?: any) {
+    this.#instance.to([clientId]).emit(event, data);
+  }
+
+  /// b ******************************************************************************
+  /// b ******************************************************************************
+  /// b ******************************************************************************
+  static async broadcast(event: string, data?: any) {
+    this.#instance.emit(event, data);
   }
 }
 

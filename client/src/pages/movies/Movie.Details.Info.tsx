@@ -2,13 +2,14 @@ import { Badge } from "@chakra-ui/react";
 import { useMemo } from "react";
 
 /// * types
-import { TMDB } from "../../../../types";
+import { Movies } from "../../../../types";
 
 /// * components
 import VHS from "./Movies.Details.Info.VHS";
 
 /// * utils
 import cn from "../../utils/cn";
+import RentButton from "./Movie.Details.Info.RentButton";
 
 /// g ************************************************
 const Row = (props: {
@@ -30,7 +31,7 @@ const Row = (props: {
 const MovieDetailsInfo = ({
   movieSelected,
 }: {
-  movieSelected: TMDB.MovieDetails;
+  movieSelected: Movies.MovieDetails;
 }) => {
   /// o ***************************************************
   const score = useMemo(() => {
@@ -78,6 +79,8 @@ const MovieDetailsInfo = ({
           <VHS poster_path={movieSelected.poster_path} />
 
           <div className="w-full xl:w-[calc(100%-300px)]">
+            <RentButton movieSelected={movieSelected} />
+
             {movieSelected.vote_count !== undefined &&
               movieSelected.vote_count > 0 && (
                 <>
@@ -88,7 +91,11 @@ const MovieDetailsInfo = ({
                   />
                 </>
               )}
-            <Row label="Original Title" value={movieSelected.original_title} />
+            <Row
+              label="Original Title"
+              value={movieSelected.original_title}
+              valueClassName="pre-wrap"
+            />
             <Row label="Release Date" value={movieSelected.release_date} />
             <Row label="Overview" value={movieSelected.overview} />
             <Row label="Tag Line" value={movieSelected.tagline} />

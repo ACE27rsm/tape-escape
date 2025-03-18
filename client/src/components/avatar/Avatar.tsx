@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { useCallback } from "react";
+import { Link } from "react-router";
 
 /// * hooks
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
@@ -14,6 +15,11 @@ const Avatar = () => {
   /// y ***************************************************
   const user = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
+
+  /// + ***************************************************
+  const handleNavigate = useCallback((path: string) => {
+    dispatch(USER_LOGOUT());
+  }, []);
 
   /// + ***************************************************
   const handleLogOut = useCallback(() => {
@@ -46,6 +52,16 @@ const Avatar = () => {
           <Box>
             HI, {user.firstName} {user.lastName.toUpperCase()}
           </Box>
+          <MenuItem value="rent-history">
+            <Link className="outline-0" to="/rent-history">
+              Rent History
+            </Link>
+          </MenuItem>
+          <MenuItem value="credits">
+            <Link className="outline-0" to="/credits">
+              Credits
+            </Link>
+          </MenuItem>
           <MenuItem onClick={handleLogOut} value="logout" color={"blue.500"}>
             Log Out
           </MenuItem>

@@ -1,4 +1,5 @@
 import fs from "fs/promises";
+import path from "path";
 
 import Logger from "./Logger";
 import { IUserWithoutPassword } from "../../types/User.types";
@@ -8,11 +9,12 @@ const logger = new Logger("user");
 
 class User {
   static users: User[] = [];
+  static filePath = path.join(process.cwd(), "db/users.db.txt");
 
   /// o ***************************************************
   static async init() {
     try {
-      this.users = JSON.parse(await fs.readFile("db/users.db.txt", "utf-8"));
+      this.users = JSON.parse(await fs.readFile(this.filePath, "utf-8"));
     } catch (error) {
       logger.error({ error });
     }

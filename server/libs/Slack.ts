@@ -51,6 +51,9 @@ class Slack {
             } else {
               throw error;
             }
+
+            counter++;
+            await task();
           }
         }
       };

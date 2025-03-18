@@ -26,7 +26,25 @@ const Footer = () => {
           </a>
         </div>
       </div>
-      <div className="!text-[#8103ff]">Powerd by TMDB</div>
+      <div className="!text-[#8103ff] flex items-center gap-2">
+        <div className="text-center">
+          <div>Powerd by TMDB</div>
+          <div>Thank you TMDB, thank you so much! ❤️</div>
+        </div>
+        <div className="!p-2 bg-[#0d253f] rounded-lg">
+          <a
+            href="https://www.themoviedb.org/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img
+              src="images/logos/tmdb-logo.svg"
+              alt="tmdb logo"
+              className="!h-6"
+            />
+          </a>
+        </div>
+      </div>
     </div>
   );
 };

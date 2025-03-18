@@ -2,7 +2,24 @@ import React from "react";
 
 const MoviesDetailsVHS = ({ poster_path }: { poster_path: string | null }) => {
   if (!poster_path) {
-    return null;
+    return (
+      <div className="w-64 h-96  shrink-0 !p-5 relative xl:translate-x-[-30px] flex justify-center items-center">
+        <div
+          className="!p-2 w-max bg-[#0d253f] rounded-lg h-max  !border-solid !border-[#01b4e4] !border-r-4"
+          style={{
+            transform:
+              "perspective(1000px) rotateY(-30deg) rotateX(0deg) translateX(0px) translateY(0px)",
+            transformStyle: "preserve-3d",
+          }}
+        >
+          <img
+            src="images/logos/tmdb-logo.svg"
+            alt="tmdb logo"
+            className="!h-32"
+          />
+        </div>
+      </div>
+    );
   }
 
   return (

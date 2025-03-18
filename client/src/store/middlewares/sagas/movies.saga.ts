@@ -27,12 +27,69 @@ import {
   MOVIES_DETAILS_FETCHING,
   MOVIES_DETAILS_GET,
   MOVIES_DETAILS_SET,
+  MOVIES_RENT_MOVIE,
+  MOVIES_RENTED_TOGGLE,
+  MOVIES_RETURN_MOVIE,
 } from "../../actions";
 
 /// * types
-import { TMDB, IMovieListPayload } from "../../../../../types";
+import { Movies, TMDB, IMovieListPayload } from "../../../../../types";
 
 const logger = new LoggerClient("movieSaga", { color: "pink" });
+
+/// y *****************************************
+/// y *****************************************
+/// y *****************************************
+function* returnMovie() {
+  function* get({ payload: movieId }: { payload: number }) {
+    try {
+      yield put(
+        MOVIES_RENTED_TOGGLE({
+          movieId,
+          rented: false,
+          rentedByThisUser: false,
+        })
+      );
+
+      yield call(Axios.post, `/movies/return`, { movieId });
+    } catch (error) {
+      logger.debugError(error);
+      yield put(UI_ERROR_HANDLER(error));
+      yield put(
+        MOVIES_RENTED_TOGGLE({ movieId, rented: true, rentedByThisUser: true })
+      );
+    }
+  }
+
+  yield takeLatest(MOVIES_RETURN_MOVIE, get);
+}
+
+/// y *****************************************
+/// y *****************************************
+/// y *****************************************
+function* rentMovie() {
+  function* get({ payload: movieId }: { payload: number }) {
+    try {
+      yield put(
+        MOVIES_RENTED_TOGGLE({ movieId, rented: true, rentedByThisUser: true })
+      );
+
+      yield call(Axios.post, `/movies/rent`, { movieId });
+    } catch (error) {
+      logger.debugError(error);
+      yield put(UI_ERROR_HANDLER(error));
+      yield put(
+        MOVIES_RENTED_TOGGLE({
+          movieId,
+          rented: false,
+          rentedByThisUser: false,
+        })
+      );
+    }
+  }
+
+  yield takeLatest(MOVIES_RENT_MOVIE, get);
+}
 
 /// y *****************************************
 /// y *****************************************
@@ -48,7 +105,7 @@ function* getMovieDetails() {
         delay(200),
       ]);
 
-      const data: TMDB.MovieDetails = response.data;
+      const data: Movies.MovieDetails = response.data;
 
       yield put(MOVIES_DETAILS_SET(data));
     } catch (error) {
@@ -77,7 +134,7 @@ function* getMovieList() {
         delay(200),
       ]);
 
-      const data: TMDB.MovieList = response.data;
+      const data: Movies.MovieList = response.data;
 
       yield put(MOVIES_LIST_SET({ ...data, query: payload.query }));
     } catch (error) {
@@ -122,6 +179,8 @@ function* getGenres() {
 }
 
 function* movieSaga() {
+  yield spawn(returnMovie);
+  yield spawn(rentMovie);
   yield spawn(getMovieDetails);
   yield spawn(getDebouncedMovieList);
   yield spawn(getMovieList);

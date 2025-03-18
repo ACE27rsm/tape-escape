@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { TMDB, IMovieListResult } from "../../../../types";
+import { Movies, TMDB, IMovieListResult } from "../../../../types";
 
 export interface IUIState {
   genres: {
@@ -8,14 +8,14 @@ export interface IUIState {
   };
   list: {
     fetching: boolean;
-    moviesList: TMDB.Movie[];
+    moviesList: Movies.Movie[];
     query: string;
     page: number;
     totalPages: number;
   };
   movieDetails: {
     fetching: boolean;
-    movie: TMDB.MovieDetails | null;
+    movie: Movies.MovieDetails | null;
   };
 }
 
@@ -66,9 +66,38 @@ const slice = createSlice({
 
     MOVIES_DETAILS_SET: (
       movies,
-      { payload }: { payload: TMDB.MovieDetails | null }
+      { payload }: { payload: Movies.MovieDetails | null }
     ) => {
       movies.movieDetails.movie = payload;
+    },
+
+    MOVIES_RENTED_TOGGLE: (
+      movies,
+      {
+        payload,
+      }: {
+        payload: {
+          movieId: number;
+          rented: boolean;
+          rentedByThisUser: boolean;
+        };
+      }
+    ) => {
+      movies.list.moviesList = movies.list.moviesList.map((movie) => {
+        if (movie.id === payload.movieId) {
+          movie.rented = payload.rented;
+          movie.rentedByThisUser = payload.rentedByThisUser;
+        }
+        return movie;
+      });
+
+      if (
+        movies.movieDetails.movie &&
+        movies.movieDetails.movie.id === payload.movieId
+      ) {
+        movies.movieDetails.movie.rented = payload.rented;
+        movies.movieDetails.movie.rentedByThisUser = payload.rentedByThisUser;
+      }
     },
 
     MOVIES_RESET: () => {

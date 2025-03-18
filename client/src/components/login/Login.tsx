@@ -1,6 +1,6 @@
 /// * utils
 import { FormEvent, useCallback, useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import cn from "../../utils/cn";
 
 /// * hooks
@@ -108,6 +108,12 @@ const Login = () => {
           {loginError}
         </div>
       )}
+
+      <div>
+        <Link to="/credits" className="!text-2xl !outeline-0">
+          Credits
+        </Link>
+      </div>
     </div>
   );
 };

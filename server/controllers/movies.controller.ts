@@ -1,12 +1,11 @@
 import express, { NextFunction } from "express";
 import httpErrors from "http-errors";
-import httpStatus from "http-status";
 
 /// * API
-import TMDB_API from "@/libs/TMDB_API";
+import Movies from "../libs/Movies";
 
 /// * types
-import { IRequestWithAuth, TMDB } from "../../types";
+import { IRequestWithAuth } from "../../types";
 
 class MoviesController {
   /// o ********************************
@@ -18,12 +17,17 @@ class MoviesController {
     try {
       const query = req.query.query ? String(req.query.query) : "";
       const page = req.query.page ? Number(req.query.page) : 1;
+      let userId = req.user?.username;
+
+      if (!userId) {
+        throw new httpErrors.BadRequest("userId is required");
+      }
 
       if (query) {
-        const movieList = await TMDB_API.searchMovieByName(query, page);
+        const movieList = await Movies.searchMovieByName(query, page, userId);
         res.send(movieList);
       } else {
-        const movieList = await TMDB_API.getMovieList(page);
+        const movieList = await Movies.getMovieList(page, userId);
         res.send(movieList);
       }
     } catch (error) {
@@ -38,7 +42,7 @@ class MoviesController {
     next: NextFunction
   ) {
     try {
-      const genres = await TMDB_API.getGenres();
+      const genres = await Movies.getGenres();
       res.send(genres);
     } catch (error) {
       next(error);
@@ -53,12 +57,88 @@ class MoviesController {
   ) {
     try {
       let movieId = req.params.movieId ? Number(req.params.movieId) : 0;
+      let userId = req.user?.username;
+
       if (!req.params.movieId) {
         throw new httpErrors.BadRequest("movieId is required");
       }
 
-      const movie = await TMDB_API.getMovieDetails(movieId);
+      if (!userId) {
+        throw new httpErrors.BadRequest("userId is required");
+      }
+
+      const movie = await Movies.getMovieDetails(movieId, userId);
       res.send(movie);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  /// o ********************************
+  static async rentMovie(
+    req: IRequestWithAuth,
+    res: express.Response,
+    next: NextFunction
+  ) {
+    try {
+      let movieId = req.body.movieId;
+      let userId = req.user?.username;
+
+      if (!movieId) {
+        throw new httpErrors.BadRequest("movieId is required");
+      }
+
+      if (!userId) {
+        throw new httpErrors.BadRequest("userId is required");
+      }
+
+      await Movies.rentMovie(userId, movieId);
+      res.end();
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  /// o ********************************
+  static async returnMovie(
+    req: IRequestWithAuth,
+    res: express.Response,
+    next: NextFunction
+  ) {
+    try {
+      let movieId = req.body.movieId;
+      let userId = req.user?.username;
+
+      if (!movieId) {
+        throw new httpErrors.BadRequest("movieId is required");
+      }
+
+      if (!userId) {
+        throw new httpErrors.BadRequest("userId is required");
+      }
+
+      await Movies.returnMovie(userId, movieId);
+      res.end();
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  /// o ********************************
+  static async userRentHistory(
+    req: IRequestWithAuth,
+    res: express.Response,
+    next: NextFunction
+  ) {
+    try {
+      let userId = req.user?.username;
+
+      if (!userId) {
+        throw new httpErrors.BadRequest("userId is required");
+      }
+
+      const history = await Movies.getUserRentedMovies(userId);
+      res.send(history);
     } catch (error) {
       next(error);
     }

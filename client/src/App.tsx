@@ -7,6 +7,7 @@ import Layout from "./layout/Layout";
 import Login from "./components/login/Login";
 import ProtectedRoute from "./components/protect-route/ProtectRoute";
 import Intro from "./components/intro/Intro";
+import Credits from "./pages/credits/Credits";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
               <Route path="" element={<Intro />} />
               <Route path="login" element={<Login />} />
               <Route path="*" element={<ProtectedRoute />} />
+              <Route path="credits" element={<Credits />} />
             </Route>
           </Routes>
         </Layout>

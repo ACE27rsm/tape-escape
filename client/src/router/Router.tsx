@@ -2,11 +2,11 @@ import { Routes, Route } from "react-router";
 
 /// * pages
 import Movies from "../pages/movies/Movies";
-import AboutUs from "../pages/about-us/AboutUs";
 
 /// * components
 import NavBar from "@/layout/nav-bar/NavBar";
 import Footer from "@/layout/footer/Footer";
+import History from "@/pages/history/History";
 
 const Router = () => {
   return (
@@ -16,7 +16,7 @@ const Router = () => {
       <Routes>
         <Route path="/">
           <Route path="movies" element={<Movies />} />
-          <Route path="about-us" element={<AboutUs />} />
+          <Route path="rent-history" element={<History />} />
         </Route>
       </Routes>
       <Footer />

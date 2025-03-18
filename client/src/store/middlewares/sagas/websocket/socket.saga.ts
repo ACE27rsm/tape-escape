@@ -42,6 +42,15 @@ function createSocketChannel(serviceWebSocket: Socket) {
         emit({ type: "log", data });
       });
 
+      /// = l on MOVIES ********************************************************************
+      serviceWebSocket.on("movieRented", (data: { message: string }) => {
+        emit({ type: "movieRented", data });
+      });
+
+      serviceWebSocket.on("movieReturned", (data: { message: string }) => {
+        emit({ type: "movieReturned", data });
+      });
+
       /// = ! error
       serviceWebSocket.on("error", (errorEvent) => {
         logger.debugError("error", errorEvent);
