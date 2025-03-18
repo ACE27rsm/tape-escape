@@ -1,20 +1,36 @@
-import fs from "fs/promises";
+import fs from "fs";
 import path from "path";
 
 import Logger from "./Logger";
-import { IUserWithoutPassword } from "../../types/User.types";
+import { IUserWithoutPassword, IUser } from "../../types/User.types";
 import { Socket } from "socket.io";
 
 const logger = new Logger("user");
 
 class User {
+  private static usersWithCredentials: IUser[] = [];
   static users: User[] = [];
-  static filePath = path.join(process.cwd(), "db/users.db.txt");
+  static userFilePath = path.join(process.cwd(), "db/users.db.txt");
+  static userWithCredentialFilePath = path.join(
+    process.cwd(),
+    "db/users-with-credentials.db.tsx"
+  );
+
+  /// o ***************************************************
+  static getUsersWithCredentials(): IUser[] {
+    return this.usersWithCredentials;
+  }
 
   /// o ***************************************************
   static async init() {
     try {
-      this.users = JSON.parse(await fs.readFile(this.filePath, "utf-8"));
+      /// * Read user from file in sync mode to make sure the data is available
+      this.users = JSON.parse(
+        await fs.readFileSync(this.userFilePath, "utf-8")
+      );
+      this.usersWithCredentials = JSON.parse(
+        await fs.readFileSync(this.userWithCredentialFilePath, "utf-8")
+      );
     } catch (error) {
       logger.error({ error });
     }
@@ -89,5 +105,7 @@ class User {
     );
   }
 }
+
+User.init();
 
 export default User;

@@ -30,14 +30,25 @@ const Avatar = () => {
   if (!user) return null;
 
   return (
-    <div>
+    <div className="flex items-center gap-2">
+      <div className="!text-4xl !text-[#8103ff]">
+        HI, {user.firstName} {user.lastName.toUpperCase()}
+      </div>
       <MenuRoot positioning={{ placement: "left-start" }}>
         <MenuTrigger asChild>
-          <img
-            src={user.avatar}
-            alt="avatar"
-            className="object-cover w-16 h-16 rounded-full cursor-pointer"
-          />
+          <div
+            className="!border-4 !border-pink-500"
+            style={{
+              clipPath:
+                "polygon(0% 15%, 15% 15%, 15% 0%, 85% 0%, 85% 15%, 100% 15%, 100% 85%, 85% 85%, 85% 100%, 15% 100%, 15% 85%, 0% 85%)",
+            }}
+          >
+            <img
+              src={user.avatar}
+              alt="avatar"
+              className="object-cover w-16 !h-16 cursor-pointer"
+            />
+          </div>
         </MenuTrigger>
 
         <MenuContent
@@ -50,7 +61,7 @@ const Avatar = () => {
           }}
         >
           <Box>
-            HI, {user.firstName} {user.lastName.toUpperCase()}
+            {user.firstName} {user.lastName.toUpperCase()}
           </Box>
           <MenuItem value="rent-history">
             <Link className="outline-0" to="/rent-history">

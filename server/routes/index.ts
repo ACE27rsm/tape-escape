@@ -4,6 +4,7 @@ import express from "express";
 import authRoute from "./auth.route";
 import moviesRoute from "./movies.route";
 import testRotue from "./test.route";
+import userRoute from "./user.route";
 
 const router = express.Router();
 
@@ -19,6 +20,10 @@ const appRoutes = [
   {
     path: "/test",
     route: testRotue,
+  },
+  {
+    path: "/user",
+    route: userRoute,
   },
 ];
 

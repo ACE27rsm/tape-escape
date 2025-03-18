@@ -1,14 +1,17 @@
 import fs from "fs/promises";
 import readlinePromises from "node:readline/promises";
 import bcrypt from "bcrypt";
+import path from "path";
 
 /// * types
 import { IUser } from "../../types/User.types";
 
 async function run() {
   try {
+    const filePath = path.join(process.cwd(), "..", "db/users.db.txt");
+
     const userCollection: IUser[] = JSON.parse(
-      await fs.readFile("db/users.db.txt", "utf-8")
+      await fs.readFile(filePath, "utf-8")
     );
 
     const rl = readlinePromises.createInterface({
@@ -36,7 +39,7 @@ async function run() {
 
     userCollection.push(user);
 
-    await fs.writeFile("db/users.db.txt", JSON.stringify(userCollection));
+    await fs.writeFile(filePath, JSON.stringify(userCollection));
 
     console.log("USER CREATED SUCCESSFULLY");
 

@@ -12,6 +12,8 @@ import { useAppDispatch, useAppSelector } from "../../hooks/useRedux";
 /// * components
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import LoginUsers from "./Login.Users";
+import { IUser } from "../../../../types";
 
 const Login = () => {
   /// y ***************************************************
@@ -23,17 +25,17 @@ const Login = () => {
   const navigate = useNavigate();
 
   /// ? ***************************************************
-  useEffect(() => {
-    let interval = setInterval(() => {
-      if (Date.now() - sateLastAction > 10_000) {
-        navigate("/");
-      }
-    }, 1_000);
+  // useEffect(() => {
+  //   let interval = setInterval(() => {
+  //     if (Date.now() - sateLastAction > 10_000) {
+  //       navigate("/");
+  //     }
+  //   }, 1_000);
 
-    return () => {
-      clearInterval(interval);
-    };
-  }, [sateLastAction]);
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, [sateLastAction]);
 
   /// + ***************************************************
   const handleLogin = useCallback(
@@ -61,13 +63,22 @@ const Login = () => {
     []
   );
 
+  /// + ***************************************************
+  const handleUserSelected = useCallback((user: IUser) => {
+    setStateUsername(user.username);
+
+    setStatePassword(user.password);
+
+    setStateLastAction(Date.now());
+  }, []);
+
   /// m ***************************************************
   return (
     <div
       className={cn([
         "w-full h-full",
         "flex justify-center items-center flex-col gap-4",
-        "!text-5xl",
+        "!text-5xl overflow-hidden relative",
       ])}
     >
       <div className="text-center !text-9xl">LOGIN</div>
@@ -113,6 +124,10 @@ const Login = () => {
         <Link to="/credits" className="!text-2xl !outeline-0">
           Credits
         </Link>
+      </div>
+
+      <div className="">
+        <LoginUsers onSelect={handleUserSelected} />
       </div>
     </div>
   );
