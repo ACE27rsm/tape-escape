@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 
 /// * libs
-import JWT from "@/libs/JWT";
+import JWT from "../libs/JWT";
 
 import Auth from "../libs/Auth";
 

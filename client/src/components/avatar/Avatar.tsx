@@ -22,7 +22,7 @@ const Avatar = () => {
   }, []);
 
   /// m ***************************************************
-  if (!user) return null;
+  if (!user.username) return null;
 
   return (
     <div className="flex items-center gap-2">

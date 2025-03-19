@@ -52,7 +52,7 @@ const Startup = () => {
         element.textContent = value.toFixed(0);
       },
       type: "tween",
-      duration: 3,
+      duration: 1.5,
       onComplete: () => {
         element.textContent = "65536 OK";
         setStatePnPReady(true);
@@ -73,7 +73,7 @@ const Startup = () => {
 
     const timeout = setTimeout(() => {
       element.textContent = "WDC WD3200AAJS-00RYA0 12.01B 500GB";
-    }, 1000);
+    }, 500);
     return () => {
       clearTimeout(timeout);
     };
@@ -88,7 +88,7 @@ const Startup = () => {
 
     const timeout = setTimeout(() => {
       element.textContent = "ST9500325AS 0002SDM1";
-    }, 3000);
+    }, 1500);
     return () => {
       clearTimeout(timeout);
     };
@@ -103,7 +103,7 @@ const Startup = () => {
 
     const timeout = setTimeout(() => {
       element.textContent = "LITE-ON DVD SOHD-16P9S FS09";
-    }, 1500);
+    }, 500);
     return () => {
       clearTimeout(timeout);
     };
@@ -113,7 +113,7 @@ const Startup = () => {
   const handleComplete = useCallback(() => {
     setTimeout(() => {
       dispatch(UI_STATUS("loading"));
-    }, 2000);
+    }, 1000);
   }, []);
 
   /// m ***************************************************
@@ -181,7 +181,7 @@ const Startup = () => {
           className="w-full !mt-1"
           variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
           initial="hidden"
-          transition={{ duration: 0.01, delay: 1 }}
+          transition={{ duration: 0.01, delay: 0.5 }}
           animate={stateIDESlave ? "visible" : "hidden"}
           onAnimationComplete={() => {
             setStateIDEMasterSecondary(true);
@@ -214,7 +214,7 @@ const Startup = () => {
           className="w-full !mt-1"
           variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
           initial="hidden"
-          transition={{ duration: 0.01, delay: 3 }}
+          transition={{ duration: 0.01, delay: 1.5 }}
           animate={stateIDESlaveSecondary ? "visible" : "hidden"}
           onAnimationComplete={() => {
             setStateFloppy(true);
@@ -232,7 +232,7 @@ const Startup = () => {
           className="w-full !mt-1"
           variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
           initial="hidden"
-          transition={{ duration: 0.01, delay: 1.5 }}
+          transition={{ duration: 0.01, delay: 0.5 }}
           animate={stateFloppy ? "visible" : "hidden"}
           onAnimationComplete={handleComplete}
         >

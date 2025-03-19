@@ -47,3 +47,5 @@ function unexpectedErrorHandler(error: Error) {
     process.exit(1);
   }
 }
+
+export default app;

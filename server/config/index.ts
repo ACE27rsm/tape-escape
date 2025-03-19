@@ -5,7 +5,7 @@ import path from "path";
 import castStringToBoolean from "../utils/castStringToBoolean";
 
 dotenv.config({
-  path: path.resolve(__dirname, "..", ".env.local"),
+  path: path.resolve(__dirname, "..", ".env"),
 });
 export interface IConfig {
   isProduction: boolean;
@@ -37,7 +37,7 @@ const isProduction = process.env.NODE_ENV === "production";
 const serverPort = Number(process.env.SERVER_PORT || 27027);
 const serverOrigin = process.env.SERVER_ORIGIN || `http://localhost`;
 const serverURL =
-  serverOrigin + (isProduction ? "" : `:${serverPort}`) + "/api";
+  serverOrigin + (process.env.SERVER_PORT ? `:${serverPort}` : "") + "/api";
 const ws = serverURL + "/socket.io";
 
 const config: IConfig = {

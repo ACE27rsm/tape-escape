@@ -16,14 +16,9 @@ const logger = new Logger("movies");
 
 class Movies {
   static rentedMovies: MovieTypes.RentedMovie[] = [];
-  static rentedMoviesFilePath = path.join(
-    process.cwd(),
-    "db",
-    "rented-movies.db.txt"
-  );
+  static rentedMoviesFilePath = path.join("db", "rented-movies.db.txt");
   static rentedMoviesHistory: MovieTypes.RentedMovieHistory[] = [];
   static rentedMoviesHistoryFilePath = path.join(
-    process.cwd(),
     "db",
     "rented-movies-history.db.txt"
   );

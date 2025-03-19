@@ -10,7 +10,7 @@ class UserController {
     next: NextFunction
   ) {
     try {
-      const users = User.getUsersWithCredentials();
+      const users = await User.getUsersWithCredentials();
 
       res.send(users);
     } catch (error) {

@@ -9,4 +9,7 @@ export default defineConfig({
   //   allowedHosts: true
   // },
   plugins: [react(), tailwindcss(), tsconfigPaths()],
+  build: {
+    outDir: "dist",
+  },
 });

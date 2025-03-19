@@ -1,11 +1,12 @@
 {
-  "name": "server",
+  "name": "tape-escape-server",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "dev": "cross-env DEBUG=server:* nodemon --exec tsx index.ts",
     "lint": "eslint .",
-    "test": "jest"
+    "test": "jest",
+    "build": "cross-env DEBUG=server:* tsc"
   },
   "author": "",
   "license": "ISC",
@@ -35,6 +36,7 @@
     "@eslint/js": "^9.21.0",
     "@jest/globals": "^29.7.0",
     "@types/bcrypt": "^5.0.2",
+    "@types/cookie": "^0.6.0",
     "@types/cookie-parser": "^1.4.8",
     "@types/cors": "^2.8.17",
     "@types/debug": "^4.1.12",
