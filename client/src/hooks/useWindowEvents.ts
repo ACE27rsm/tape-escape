@@ -106,7 +106,7 @@ function useWindowEvents() {
     }
 
     window.addEventListener("resize", handleResize, true);
-
+    handleResize();
     return () => {
       window.removeEventListener("resize", handleResize, true);
     };
