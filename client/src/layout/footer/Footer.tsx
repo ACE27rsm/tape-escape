@@ -28,7 +28,7 @@ const Footer = () => {
       </div>
       <div className="!text-[#8103ff] flex items-center gap-2">
         <div className="text-center">
-          <div>Powerd by TMDB</div>
+          <div>Powered by TMDB</div>
           <div>Thank you TMDB, thank you so much! ❤️</div>
         </div>
         <div className="!p-2 bg-[#0d253f] rounded-lg">
