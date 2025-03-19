@@ -1,5 +1,3 @@
-import fs from "fs";
-import path from "path";
 import httpErrors from "http-errors";
 import httpStatus from "http-status";
 import _ from "lodash";
@@ -16,34 +14,13 @@ const logger = new Logger("movies");
 
 class Movies {
   static rentedMovies: MovieTypes.RentedMovie[] = [];
-  static rentedMoviesFilePath = path.join("db", "rented-movies.db.txt");
   static rentedMoviesHistory: MovieTypes.RentedMovieHistory[] = [];
-  static rentedMoviesHistoryFilePath = path.join(
-    "db",
-    "rented-movies-history.db.txt"
-  );
   static currentRentId = 0;
 
   /// ! ********************************
   private static errorHandler(functionName: string, error: unknown): never {
     logger.error({ error, functionName });
     throw error;
-  }
-
-  /// o ***************************************************
-  static async init() {
-    try {
-      /// * Read rented movies from file in sync mode to make sure the data is available
-      this.rentedMovies = JSON.parse(
-        fs.readFileSync(this.rentedMoviesFilePath, "utf-8")
-      );
-      this.rentedMoviesHistory = JSON.parse(
-        fs.readFileSync(this.rentedMoviesHistoryFilePath, "utf-8")
-      );
-      this.currentRentId = this.rentedMoviesHistory.length;
-    } catch (error) {
-      return this.errorHandler("init", error);
-    }
   }
 
   /// o ********************************
@@ -142,24 +119,6 @@ class Movies {
     }
   }
 
-  /// g ********************************
-  static async updateDBFiles(): Promise<void> {
-    try {
-      await Promise.all([
-        fs.promises.writeFile(
-          this.rentedMoviesFilePath,
-          JSON.stringify(this.rentedMovies)
-        ),
-        fs.promises.writeFile(
-          this.rentedMoviesHistoryFilePath,
-          JSON.stringify(this.rentedMoviesHistory)
-        ),
-      ]);
-    } catch (error) {
-      logger.error({ error, functionName: "updateDBFiles" });
-    }
-  }
-
   /// l ********************************
   static async rentMovie(userId: string, movieId: number): Promise<void> {
     try {
@@ -189,8 +148,6 @@ class Movies {
 
       this.rentedMovies.push(rentedMovie);
       this.rentedMoviesHistory.push(rentedMovieHistory);
-
-      this.updateDBFiles();
 
       SocketServer.broadcast("movieRented", { movieId, userId });
     } catch (error) {
@@ -230,8 +187,6 @@ class Movies {
         this.rentedMoviesHistory[rentedMovieHistoryIndex].returnDate =
           new Date();
       }
-
-      this.updateDBFiles();
 
       SocketServer.broadcast("movieReturned", { movieId, userId });
     } catch (error) {
